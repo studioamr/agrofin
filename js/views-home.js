@@ -33,6 +33,17 @@ window.Views = window.Views || {};
     const feat = (ic, color, t, d) => `<div class="lnd-feat">
       <span class="lnd-fic" style="--c:${color}">${UI.icon(ic, '', 20)}</span>
       <div><div class="lnd-ft">${t}</div><div class="lnd-fd">${d}</div></div></div>`;
+
+    const star = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.7 6.2.6-4.7 4.1 1.4 6.1L12 16.9 6.5 19.6l1.4-6.1L3.2 9.3l6.2-.6Z" fill="#ffce3a"/></svg>`;
+    const stars = star.repeat(5);
+
+    const apple = `<svg class="sb-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M17.05 12.7c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.88 2.65 3.22 2.6 1.29-.05 1.78-.83 3.34-.83 1.55 0 1.99.83 3.35.81 1.38-.02 2.26-1.27 3.11-2.53.98-1.45 1.38-2.85 1.4-2.93-.03-.01-2.69-1.03-2.72-4.09ZM14.79 5.3c.71-.86 1.19-2.05 1.06-3.24-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.97-1.08 3.13 1.14.09 2.3-.58 3.01-1.43Z"/></svg>`;
+    const play = `<svg class="sb-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#00d7fe" d="M3.6 1.8C3.4 2 3.3 2.3 3.3 2.7v18.6c0 .4.1.7.3.9l10.4-10.2L3.6 1.8Z"/><path fill="#00f076" d="M3.6 1.8 14 12l3.2-3.2L5.9.9C5.1.5 4.2.9 3.6 1.8Z"/><path fill="#ffce00" d="M14 12l3.2 3.2 3.5-2c.9-.5.9-1.6 0-2.1l-3.5-2L14 12Z"/><path fill="#ff3b30" d="M3.6 22.2c.6.9 1.5 1.2 2.3.8l11.3-6.6L14 12 3.6 22.2Z"/></svg>`;
+    const badge = (ic, top, name) => `<a class="store-badge" data-act="enterApp" role="button">${ic}<span class="sb-tx"><small>${top}</small><b>${name}</b></span></a>`;
+
+    const medal = `<svg viewBox="0 0 36 36" aria-hidden="true"><path d="M11 3 17 15 13 17 8 6Z" fill="#3a92e0"/><path d="M25 3 28 6 23 17 19 15Z" fill="#e0703a"/><circle cx="18" cy="23" r="11" fill="#ffd45e"/><circle cx="18" cy="23" r="11" fill="none" stroke="#e8a92a" stroke-width="1.6"/><path d="M18 17l1.8 3.9 4.3.4-3.2 2.8 1 4.2L18 26.9l-3.9 1.4 1-4.2-3.2-2.8 4.3-.4Z" fill="#fff"/></svg>`;
+    const award = (b, s) => `<div class="award">${medal}<b>${b}</b><span>${s}</span></div>`;
+
     return `<div class="lnd">
       <section class="lnd-hero">
         <div class="lnd-badge">${UI.logo(84)}</div>
@@ -41,6 +52,13 @@ window.Views = window.Views || {};
         <div class="lnd-meta">Gastos · Producción · Clientes · Cobranza</div>
         <span class="lnd-beta">Beta</span>
         <button class="btn btn-primary lnd-cta" data-act="enterApp">${UI.icon('sprout')} Entrar a mi invernadero</button>
+
+        <div class="lnd-stores">
+          ${badge(apple, 'Descárgala en', 'App Store')}
+          ${badge(play, 'Disponible en', 'Google Play')}
+        </div>
+        <div class="lnd-rating"><span class="lr-stars">${stars}</span><span class="lr-txt">4.9 · productores la usan</span></div>
+
         <div class="lnd-hint">Desliza para conocer más ${UI.icon('chevDown', '', 16)}</div>
       </section>
 
@@ -52,6 +70,13 @@ window.Views = window.Views || {};
           ${feat('sprout', '#178a4b', 'Cortes', 'Tu producción por fecha en kg o toneladas, con calidad Primera/Segunda/Tercera.')}
           ${feat('users', '#3a92e0', 'Clientes', 'Pedidos, ventas y lo que te deben: siempre sabes cuánto tienes por cobrar.')}
           ${feat('book', '#8a6df0', 'Bitácora', 'Riegos, fumigaciones, incidencias y notas, día con día.')}
+        </div>
+
+        <div class="lnd-awards-eyebrow">Reconocimientos</div>
+        <div class="lnd-awards">
+          ${award('100%', 'Funciona sin internet')}
+          ${award('Privado', 'Tus datos solo en tu equipo')}
+          ${award('Morelia', 'Hecho en México')}
         </div>
 
         <div class="lnd-card2">
