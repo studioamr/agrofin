@@ -1,9 +1,9 @@
 /* INVERNA · service worker — cache app shell para uso sin internet */
-const CACHE = 'inverna-v23';
+const CACHE = 'inverna-v24';
 const ASSETS = [
   './', './index.html', './manifest.json', './icon.svg',
-  './css/styles.css?v=11',
-  './js/store.js?v=2', './js/data.js?v=2', './js/ui.js?v=14', './js/q.js?v=2',
+  './css/styles.css?v=12',
+  './js/store.js?v=2', './js/data.js?v=2', './js/ui.js?v=15', './js/q.js?v=2',
   './js/forms.js?v=2', './js/views-home.js?v=9', './js/views-gastos.js?v=3',
   './js/views-cortes.js?v=3', './js/views-clientes.js?v=3', './js/views-bitacora.js?v=1',
   './js/views-prod.js?v=1', './js/app.js?v=5',
