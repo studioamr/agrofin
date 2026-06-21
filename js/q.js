@@ -60,6 +60,27 @@ const Q = (() => {
   // ---- inventario ----
   function invBy(kind) { return db().inventory.filter(i => i.kind === kind).slice().sort((a, b) => a.name.localeCompare(b.name)); }
 
+  // ---- resumen del ciclo (todo el historial, no por mes) ----
+  function cycleSummary() {
+    const gastos = sum(db().expenses, x => x.amount);
+    const trabajos = sum(db().tasks, x => x.cost || 0);
+    const aplic = sum(db().applications, x => x.cost || 0);
+    const costs = gastos + trabajos + aplic;
+    const kg = sum(db().harvests, x => x.kg);
+    const entregados = db().orders.filter(o => o.status === 'entregado');
+    const sales = sum(entregados, x => x.total);
+    const kgSold = sum(entregados, x => x.kg);
+    const byQ = Data.QUALITIES.map(q => ({ q, kg: sum(db().harvests.filter(h => h.quality === q.id), x => x.kg) })).filter(r => r.kg > 0);
+    return {
+      gastos, trabajos, aplic, costs, kg, byQ, sales, kgSold,
+      profit: sales - costs,
+      costPerKg: kg > 0 ? costs / kg : 0,
+      avgPrice: kgSold > 0 ? sales / kgSold : 0,
+      margin: sales > 0 ? (sales - costs) / sales : 0,
+      receivable: receivableTotal(),
+    };
+  }
+
   // ---- resumen del mes ----
   function monthSummary(key) {
     const exp = expensesTotal(inMonth(db().expenses, key));
@@ -76,6 +97,6 @@ const Q = (() => {
     clientOrders, clientBalance, clientTotalSold, clientById, clientName,
     tasksAll, tasksBy, taskCount, tasksCost,
     irrigMonth, waterMonth, fertMonth, appsMonth, appsCost, invBy,
-    monthSummary,
+    cycleSummary, monthSummary,
   };
 })();

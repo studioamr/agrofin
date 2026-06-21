@@ -13,7 +13,7 @@ const App = (() => {
 
   function shiftMonth(key, d) { let [y, m] = key.split('-').map(Number); m += d; while (m < 1) { m += 12; y--; } while (m > 12) { m -= 12; y++; } return y + '-' + String(m).padStart(2, '0'); }
 
-  const MAS_ROUTES = ['mas', 'tareas', 'riego', 'aplicaciones', 'inventario', 'bitacora'];
+  const MAS_ROUTES = ['mas', 'rentabilidad', 'tareas', 'riego', 'aplicaciones', 'inventario', 'bitacora'];
   function tabbar() {
     const on = r => ((r === 'mas' ? MAS_ROUTES.includes(route) : route === r) ? 'on' : '');
     const t = (r, ic, lb) => `<button class="${on(r)}" data-act="go" data-route="${r}">${UI.icon(ic)}<span>${lb}</span></button>`;
@@ -263,6 +263,54 @@ const App = (() => {
     saveName() { db.meta.name = val('set-name') || 'Mi invernadero'; save(); UI.toast('Nombre guardado'); render(); },
     addProduct() { const v = val('set-prod'); if (!v) return; addProductIfNew(v); save(); UI.sheet(Views.settings()); },
     delProduct(el) { db.products = db.products.filter(x => x !== el.dataset.v); save(); UI.sheet(Views.settings()); },
+    exportCSV() {
+      try {
+        const c = Q.cycleSummary(), cy = db.cycle || {};
+        const esc = v => { v = (v == null ? '' : String(v)); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+        const L = []; const row = (...a) => L.push(a.map(esc).join(','));
+        row('AGROFIN · Resumen del ciclo');
+        row('Ciclo', cy.name || ''); row('Cultivo', cy.crop || ''); row('Variedad', cy.variety || ''); row('Inicio', cy.start || '');
+        row('');
+        row('Concepto', 'Monto');
+        row('Gastos y compras', Math.round(c.gastos));
+        row('Mano de obra / trabajos', Math.round(c.trabajos));
+        row('Aplicaciones foliares', Math.round(c.aplic));
+        row('INVERSIÓN TOTAL', Math.round(c.costs));
+        row('Ventas', Math.round(c.sales));
+        row('UTILIDAD', Math.round(c.profit));
+        row('Por cobrar', Math.round(c.receivable));
+        row('Producción (kg)', Math.round(c.kg));
+        row('Kg vendidos', Math.round(c.kgSold));
+        row('Costo por kilo', Math.round(c.costPerKg * 100) / 100);
+        row('Precio venta por kilo', Math.round(c.avgPrice * 100) / 100);
+        row('Margen %', Math.round(c.margin * 100));
+        row('');
+        row('GASTOS'); row('Fecha', 'Categoría', 'Concepto', 'Monto');
+        Q.byDateDesc(db.expenses).forEach(e => row(e.date, Data.catOf(e.cat).label, e.concept, e.amount));
+        row('');
+        row('TRABAJOS'); row('Fecha', 'Trabajo', 'Estado', 'Costo');
+        Q.byDateDesc(db.tasks).forEach(t => row(t.date, t.title, Data.stOf(t.status).label, t.cost || 0));
+        row('');
+        row('APLICACIONES FOLIARES'); row('Fecha', 'Producto', 'Dosis', 'Costo');
+        Q.byDateDesc(db.applications).forEach(a => row(a.date, a.product, a.dose, a.cost || 0));
+        row('');
+        row('RIEGOS'); row('Fecha', 'Min', 'Agua', 'Unidad', 'Fertirriego', 'Unidad');
+        Q.byDateDesc(db.irrigations).forEach(r => row(r.date, r.minutes || 0, r.water || 0, r.wunit || '', r.fert || 0, r.funit || ''));
+        row('');
+        row('CORTES'); row('Fecha', 'Cultivo', 'Calidad', 'kg');
+        Q.byDateDesc(db.harvests).forEach(h => row(h.date, h.product, Data.qualOf(h.quality).label, h.kg));
+        row('');
+        row('VENTAS / PEDIDOS'); row('Fecha', 'Cliente', 'Cultivo', 'kg', 'Precio/kg', 'Total', 'Estado', 'Pagado');
+        Q.byDateDesc(db.orders).forEach(o => row(o.date, Q.clientName(o.clientId), o.product, o.kg, o.price, o.total, o.status, o.paid || 0));
+        row('');
+        row('INVENTARIO'); row('Tipo', 'Nombre', 'Cantidad', 'Unidad');
+        db.inventory.forEach(i => row(Data.kindOf(i.kind).label, i.name, i.qty, i.unit || ''));
+        const blob = new Blob(['﻿' + L.join('\n')], { type: 'text/csv;charset=utf-8' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'agrofin-ciclo.csv'; a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        UI.toast('Ciclo exportado a Excel (.csv)');
+      } catch (e) { UI.toast('No se pudo exportar'); }
+    },
     exportData() {
       try {
         const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });

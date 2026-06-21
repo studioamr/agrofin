@@ -1,12 +1,12 @@
 /* INVERNA · service worker — cache app shell para uso sin internet */
-const CACHE = 'inverna-v27';
+const CACHE = 'inverna-v29';
 const ASSETS = [
   './', './index.html', './manifest.json', './icon.svg',
   './css/styles.css?v=14',
-  './js/store.js?v=4', './js/data.js?v=2', './js/ui.js?v=15', './js/q.js?v=2',
+  './js/store.js?v=4', './js/data.js?v=2', './js/ui.js?v=15', './js/q.js?v=3',
   './js/forms.js?v=2', './js/views-home.js?v=12', './js/views-gastos.js?v=3',
   './js/views-cortes.js?v=3', './js/views-clientes.js?v=3', './js/views-bitacora.js?v=1',
-  './js/views-prod.js?v=1', './js/app.js?v=7',
+  './js/views-prod.js?v=3', './js/app.js?v=8',
 ];
 
 self.addEventListener('install', e => {

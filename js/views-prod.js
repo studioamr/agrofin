@@ -21,6 +21,7 @@ window.Views = window.Views || {};
     </div>
 
     <div class="card mt12 list">
+      ${link('rentabilidad', 'chart', '#0e6c39', 'Rentabilidad del ciclo', 'Costo por kilo, utilidad y margen')}
       ${link('tareas', 'tool', '#178a4b', 'Trabajos', 'Pendientes, en proceso, hechos · costo')}
       ${link('riego', 'droplet', '#3a92e0', 'Riego y fertirriego', 'Frecuencia, agua y fertirriego')}
       ${link('aplicaciones', 'flask', '#8a6df0', 'Aplicaciones foliares', 'Producto, dosis y costo')}
@@ -93,6 +94,48 @@ window.Views = window.Views || {};
         ${a.cost > 0 ? `<div class="lr neg">${UI.money(a.cost)}</div>` : ''}
       </div>`).join('') : UI.empty('flask', 'Sin aplicaciones este mes', 'Toca + para registrar una aplicación.')}
     </div>`;
+  };
+
+  /* ---------------- Rentabilidad del ciclo ---------------- */
+  V.rentabilidad = function () {
+    const c = Q.cycleSummary();
+    const cy = App.db.cycle || {};
+    const profitColor = c.profit >= 0 ? 'var(--brand)' : 'var(--danger)';
+    const maxCost = Math.max(c.gastos, c.trabajos, c.aplic, 1);
+    const maxQ = c.byQ.length ? Math.max(...c.byQ.map(r => r.kg)) : 1;
+    const m2 = n => '$' + (Math.round((n || 0) * 100) / 100).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return `
+    <div class="topbar">${back}<div><h1>Rentabilidad</h1><div class="sub">${UI.esc(cy.crop || 'Ciclo')}${cy.variety ? ' · ' + UI.esc(cy.variety) : ''}</div></div>
+      <div class="spacer"></div><button class="iconbtn" data-act="exportCSV" aria-label="Exportar">${UI.icon('download')}</button></div>
+
+    <div class="balance-card mt8">
+      <span class="eyebrow">Utilidad del ciclo</span>
+      <div class="bc-big" style="color:${profitColor}">${c.profit < 0 ? '−' : ''}${UI.money(Math.abs(c.profit))}</div>
+      <div class="bc-split">
+        <div><div class="bc-k">${UI.icon('trendUp')} Ventas</div><div class="bc-v pos">${UI.money(c.sales)}</div></div>
+        <div class="bc-div"></div>
+        <div><div class="bc-k">${UI.icon('money')} Inversión</div><div class="bc-v neg">${UI.money(c.costs)}</div></div>
+      </div>
+    </div>
+
+    <div class="stat-grid mt12">
+      <div class="stat" style="--c:#c4790f"><div class="stat-ic">${UI.icon('scale', '', 18)}</div><div class="stat-val">${m2(c.costPerKg)}</div><div class="stat-lbl">Costo por kilo</div></div>
+      <div class="stat" style="--c:#178a4b"><div class="stat-ic">${UI.icon('coin', '', 18)}</div><div class="stat-val">${m2(c.avgPrice)}</div><div class="stat-lbl">Precio venta/kg</div></div>
+      <div class="stat" style="--c:#3a92e0"><div class="stat-ic">${UI.icon('sprout', '', 18)}</div><div class="stat-val">${UI.weight(c.kg)}</div><div class="stat-lbl">Producción</div></div>
+      <div class="stat" style="--c:#8a6df0"><div class="stat-ic">${UI.icon('chart', '', 18)}</div><div class="stat-val">${Math.round(c.margin * 100)}%</div><div class="stat-lbl">Margen</div></div>
+    </div>
+
+    <div class="section-head mt20"><h3 class="h3">Inversión del ciclo</h3><span class="small muted">${UI.money(c.costs)}</span></div>
+    <div class="card mt8">
+      ${UI.bar(c.gastos, maxCost, '#c4790f', UI.dot('#c4790f') + 'Gastos y compras', UI.money(c.gastos))}
+      ${UI.bar(c.trabajos, maxCost, '#178a4b', UI.dot('#178a4b') + 'Mano de obra / trabajos', UI.money(c.trabajos))}
+      ${UI.bar(c.aplic, maxCost, '#8a6df0', UI.dot('#8a6df0') + 'Aplicaciones foliares', UI.money(c.aplic))}
+    </div>
+
+    ${c.byQ.length ? `<div class="section-head mt20"><h3 class="h3">Producción por calidad</h3><span class="small muted">${UI.weight(c.kg)}</span></div>
+      <div class="card mt8">${c.byQ.map(r => UI.bar(r.kg, maxQ, r.q.color, UI.dot(r.q.color) + r.q.label, UI.weight(r.kg))).join('')}</div>` : ''}
+
+    <button class="btn btn-ghost mt16" data-act="exportCSV">${UI.icon('download')} Exportar ciclo a Excel (.csv)</button>`;
   };
 
   /* ---------------- Inventario ---------------- */
