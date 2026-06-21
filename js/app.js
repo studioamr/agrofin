@@ -1,6 +1,8 @@
 /* ============ INVERNA · App shell, router y acciones ============ */
 const App = (() => {
-  const db = Store.load();   // un usuario nuevo arranca vacío; los datos de ejemplo son opcionales (Ajustes)
+  const db = Store.load();
+  // usuario nuevo: muestra datos de ejemplo para previsualizar (a menos que haya vaciado a propósito)
+  if (!db.seeded && !db.meta.cleared) { Data.seed(db); Store.save(db); }
 
   const state = { period: UI.todayKey(), gastoCat: '', cliSeg: 'clientes', pedFilter: 'todos', bitSeg: 'bitacora', taskFilter: 'todos', invKind: 'insumo' };
   let route = db.meta.entered ? 'home' : 'landing';
@@ -245,7 +247,7 @@ const App = (() => {
     doReset() { Object.assign(db, Store.empty()); Data.seed(db); save(); UI.closeSheet(); state.period = UI.todayKey(); go('home'); UI.toast('Ejemplo recargado'); },
     wipeAll: () => UI.modal(`<div class="h3 mb8">¿Borrar todo?</div><p class="muted small mb16">Se eliminan todos tus gastos, cortes, clientes y notas de este teléfono. No se puede deshacer.</p>
       <div class="btn-row"><button class="btn btn-ghost" data-act="closeSheet">Cancelar</button><button class="btn btn-danger" data-act="doWipe">Borrar todo</button></div>`),
-    doWipe() { Object.assign(db, Store.empty()); save(); UI.closeSheet(); state.period = UI.todayKey(); go('landing'); UI.toast('Listo, empezamos de cero'); },
+    doWipe() { Object.assign(db, Store.empty()); db.meta.cleared = true; save(); UI.closeSheet(); state.period = UI.todayKey(); go('landing'); UI.toast('Listo, empezamos de cero'); },
   };
 
   /* ---- delegación de eventos ---- */

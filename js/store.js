@@ -3,7 +3,7 @@ const Store = (() => {
   const KEY = 'inverna_v1';
 
   const empty = () => ({
-    meta: { name: 'Mi invernadero', area: '', entered: false },
+    meta: { name: 'Mi invernadero', area: '', entered: false, cleared: false },
     cycle: { crop: 'Jitomate saladet', variety: 'Mosquetero', start: '', name: 'Ciclo actual' },
     products: ['Jitomate saladet'],               // cultivos (editables)
     expenses: [],     // gastos / compras  {id,date,cat,concept,amount,note}

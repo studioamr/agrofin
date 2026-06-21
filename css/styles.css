@@ -450,6 +450,37 @@ body.landing .ib-scrim { background: linear-gradient(180deg, transparent 0%, tra
   padding: 0 18px calc(40px + env(safe-area-inset-bottom)); max-width: var(--maxw); }
 .lnd-eyebrow { font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #fff; text-align: center; text-shadow: 0 2px 10px rgba(18,64,98,.5); }
 .lnd-h2 { font-size: 25px; font-weight: 900; letter-spacing: -.02em; text-align: center; margin-top: 5px; margin-bottom: 18px; color: #fff; text-shadow: 0 4px 18px rgba(18,64,98,.45); }
+/* mockups de iphone (cómo se ve la app) */
+.lnd-phones { display: flex; gap: 16px; overflow-x: auto; padding: 6px 18px 14px; margin: 0 -18px 4px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.lnd-phones::-webkit-scrollbar { display: none; }
+.phone { flex: none; width: 190px; scroll-snap-align: center; border-radius: 30px; padding: 7px; background: linear-gradient(165deg, #26402f, #14241b); box-shadow: 0 22px 44px rgba(16,40,24,.32); }
+.phone-screen { position: relative; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg, #e9f3e4, #ffffff 42%); height: 384px; }
+.phone-notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 52px; height: 15px; background: #14241b; border-radius: 99px; z-index: 3; }
+.pm { padding: 26px 11px 12px; color: var(--text); }
+.pm-top { font-size: 14px; font-weight: 900; letter-spacing: -.02em; margin-bottom: 8px; }
+.pm-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 10px; box-shadow: 0 4px 10px rgba(20,45,28,.05); margin-bottom: 8px; }
+.pm-green { background: linear-gradient(150deg, #fff, #eef8ea); }
+.pm-eyebrow { font-size: 8.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.pm-big { font-size: 24px; font-weight: 900; letter-spacing: -.03em; color: var(--brand-ink); line-height: 1.12; }
+.pm-split { display: flex; gap: 8px; margin-top: 6px; }
+.pm-split span { flex: 1; display: flex; flex-direction: column; }
+.pm-split i { font-style: normal; font-size: 9px; color: var(--muted); }
+.pm-split b { font-size: 12px; font-weight: 900; }
+.pm-split b.pos { color: var(--brand-ink); } .pm-split b.neg { color: #b4543f; }
+.pm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pm-mini { margin-bottom: 0; } .pm-mv { font-size: 15px; font-weight: 900; white-space: nowrap; } .pm-ml { font-size: 9px; color: var(--muted); }
+.pm-br { display: flex; justify-content: space-between; font-size: 9.5px; font-weight: 700; }
+.pm-br.mt { margin-top: 7px; } .pm-br b { font-weight: 900; }
+.pm-bar { height: 5px; border-radius: 4px; background: var(--card2); margin-top: 3px; overflow: hidden; }
+.pm-bar span { display: block; height: 100%; border-radius: 4px; }
+.pm-li { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-top: 1px solid var(--line-soft); }
+.pm-li:first-child { border-top: 0; }
+.pm-lt { font-size: 10.5px; font-weight: 700; }
+.pm-li b { font-size: 11px; font-weight: 900; } .pm-li b.neg { color: #b4543f; }
+.pm-bd { display: inline-block; margin-top: 3px; font-size: 8.5px; font-weight: 800; padding: 2px 7px; border-radius: 99px; color: var(--c); background: color-mix(in srgb, var(--c) 16%, transparent); }
+.pm-pill { border: 1px solid var(--line); border-left: 3px solid var(--c); border-radius: 10px; padding: 7px 8px; background: #fff; }
+.pm-pl { font-size: 9px; font-weight: 800; color: var(--muted); } .pm-pv { font-size: 13px; font-weight: 900; }
+
 .lnd-feats { display: flex; flex-direction: column; gap: 11px; }
 .lnd-feat { padding: 14px 16px; border-radius: 16px;
   background: rgba(255,255,255,.62); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3);

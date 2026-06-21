@@ -43,6 +43,40 @@ window.Views = window.Views || {};
 
     const award = (ic, color, b, s) => `<div class="award"><span class="aw-ic" style="--c:${color}">${UI.icon(ic, '', 21)}</span><b>${b}</b><span>${s}</span></div>`;
 
+    const phone = inner => `<div class="phone"><div class="phone-screen"><span class="phone-notch"></span>${inner}</div></div>`;
+    const s1 = `<div class="pm">
+      <div class="pm-top">AGROFIN</div>
+      <div class="pm-card"><div class="pm-eyebrow">Utilidad del mes</div><div class="pm-big">$20,800</div>
+        <div class="pm-split"><span><i>Ventas</i><b class="pos">$37,920</b></span><span><i>Gastos</i><b class="neg">$17,120</b></span></div></div>
+      <div class="pm-grid">
+        <div class="pm-card pm-mini"><div class="pm-mv">3.02 t</div><div class="pm-ml">Cortes</div></div>
+        <div class="pm-card pm-mini"><div class="pm-mv">$10,320</div><div class="pm-ml">Por cobrar</div></div></div>
+      <div class="pm-card">
+        <div class="pm-br"><span>Mano de obra</span><b>$7,200</b></div><div class="pm-bar"><span style="width:100%;background:#c4790f"></span></div>
+        <div class="pm-br mt"><span>Agroquímicos</span><b>$6,950</b></div><div class="pm-bar"><span style="width:92%;background:#3a92e0"></span></div>
+        <div class="pm-br mt"><span>Insumos</span><b>$1,340</b></div><div class="pm-bar"><span style="width:20%;background:#178a4b"></span></div></div>
+    </div>`;
+    const s2 = `<div class="pm">
+      <div class="pm-top">Trabajos</div>
+      <div class="pm-card"><div class="pm-eyebrow">Costo de trabajos</div><div class="pm-big" style="color:var(--text)">$3,000</div></div>
+      <div class="pm-card">
+        <div class="pm-li"><div class="grow"><div class="pm-lt">Tutoreo y bajado</div><span class="pm-bd" style="--c:#3a92e0">En proceso</span></div><b class="neg">$1,800</b></div>
+        <div class="pm-li"><div class="grow"><div class="pm-lt">Deshoje sanitario</div><span class="pm-bd" style="--c:#c4790f">Pendiente</span></div></div>
+        <div class="pm-li"><div class="grow"><div class="pm-lt">Poda de brotes</div><span class="pm-bd" style="--c:#178a4b">Hecho</span></div><b class="neg">$1,200</b></div>
+        <div class="pm-li"><div class="grow"><div class="pm-lt">Revisión de goteros</div><span class="pm-bd" style="--c:#c4790f">Pendiente</span></div></div></div>
+    </div>`;
+    const s3 = `<div class="pm">
+      <div class="pm-top">Cortes</div>
+      <div class="pm-card pm-green"><div class="pm-eyebrow">Producción del mes</div><div class="pm-big">3.02 t</div></div>
+      <div class="pm-grid">
+        <div class="pm-pill" style="--c:#178a4b"><div class="pm-pl">Primera</div><div class="pm-pv">2.81 t</div></div>
+        <div class="pm-pill" style="--c:#c4790f"><div class="pm-pl">Segunda</div><div class="pm-pv">210 kg</div></div></div>
+      <div class="pm-card">
+        <div class="pm-li"><div class="pm-lt grow">Jitomate · Primera</div><b>820 kg</b></div>
+        <div class="pm-li"><div class="pm-lt grow">Jitomate · Primera</div><b>760 kg</b></div>
+        <div class="pm-li"><div class="pm-lt grow">Pepino · Primera</div><b>540 kg</b></div></div>
+    </div>`;
+
     return `<div class="lnd">
       <section class="lnd-hero">
         <h1 class="lnd-logo">AGROFIN</h1>
@@ -61,7 +95,11 @@ window.Views = window.Views || {};
       </section>
 
       <section class="lnd-body">
-        <div class="lnd-eyebrow">Todo tu invernadero, en un lugar</div>
+        <div class="lnd-eyebrow">Así se ve en tu teléfono</div>
+        <h2 class="lnd-h2">Fácil de llenar, fácil de leer</h2>
+        <div class="lnd-phones">${phone(s1)}${phone(s2)}${phone(s3)}</div>
+
+        <div class="lnd-eyebrow mt24">Todo tu invernadero, en un lugar</div>
         <h2 class="lnd-h2">Lleva el control sin complicarte</h2>
         <div class="lnd-feats">
           ${feat('money', '#c4790f', 'Gastos y compras', 'Agroquímicos, insumos, gasolina, equipos y mano de obra.')}
