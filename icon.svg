@@ -1,13 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="ig" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2bb673"/>
-      <stop offset="1" stop-color="#138a4b"/>
+    <clipPath id="rc"><rect width="64" height="64" rx="15"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5bbdf0"/>
+      <stop offset="1" stop-color="#cdeaf2"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="15" fill="url(#ig)"/>
-  <g fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M19 51 L32 15 L45 51"/>
-    <path d="M24.5 39 H39.5"/>
+  <g clip-path="url(#rc)">
+    <rect width="64" height="64" fill="url(#sky)"/>
+    <circle cx="47" cy="17" r="8" fill="#ffe487"/>
+    <path d="M0 43 Q16 37 32 41 Q48 45 64 39 V64 H0 Z" fill="#86cf5c"/>
+    <path d="M0 52 Q20 47 40 51 Q54 54 64 50 V64 H0 Z" fill="#5cae46"/>
+    <path d="M22 41 L32 31 L42 41 Z" fill="#dcf0fb"/>
+    <rect x="24" y="41" width="16" height="11" fill="#dcf0fb"/>
+    <g fill="none" stroke="#2f9047" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M22 41 L32 31 L42 41"/>
+      <rect x="24" y="41" width="16" height="11"/>
+      <path d="M32 31 V52 M24 46 H40"/>
+    </g>
+    <rect x="30" y="46" width="4" height="6" fill="#2f9047"/>
   </g>
 </svg>
