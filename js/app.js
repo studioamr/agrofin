@@ -2,8 +2,7 @@
 const App = (() => {
   let userId = Store.session();
   let db = userId ? Store.load(userId) : Store.empty();
-  // datos de ejemplo para previsualizar (a menos que la cuenta haya vaciado a propósito)
-  if (userId && !db.seeded && !db.meta.cleared) { Data.seed(db); Store.save(userId, db); }
+  // las cuentas arrancan limpias; los datos de ejemplo son opcionales (Ajustes → "Cargar datos de ejemplo")
 
   const state = { period: UI.todayKey(), gastoCat: '', cliSeg: 'clientes', pedFilter: 'todos', bitSeg: 'bitacora', taskFilter: 'todos', invKind: 'insumo', authMode: 'signup', authErr: null };
   let route = userId ? 'home' : 'landing';
@@ -68,13 +67,12 @@ const App = (() => {
         if (us.some(u => u.name.toLowerCase() === key)) return fail('Ya existe una cuenta con ese nombre');
         const id = Store.uid();
         us.push({ id, name, pw: h }); Store.saveUsers(us); Store.setSession(id);
-        userId = id; db = Store.empty(); Data.seed(db); Store.save(id, db);
+        userId = id; db = Store.empty(); Store.save(id, db);
         state.authErr = null; UI.toast('¡Cuenta creada!'); go('home');
       } else {
         const u = us.find(x => x.name.toLowerCase() === key);
         if (!u || u.pw !== h) return fail('Nombre o contraseña incorrectos');
         Store.setSession(u.id); userId = u.id; db = Store.load(u.id);
-        if (!db.seeded && !db.meta.cleared) { Data.seed(db); Store.save(u.id, db); }
         state.authErr = null; go('home');
       }
     },
