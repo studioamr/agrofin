@@ -171,7 +171,7 @@ window.Views = window.Views || {};
 
     return `
     <div class="topbar">
-      <div class="row gap10">${UI.logo(34)}<div><h1>AGROFIN</h1><div class="sub">${UI.esc(name)}</div></div></div>
+      <div><h1>AGROFIN</h1><div class="sub">${UI.esc(name)}</div></div>
       <div class="spacer"></div>
       <button class="iconbtn" data-act="openSettings" aria-label="Ajustes">${UI.icon('settings')}</button>
     </div>
