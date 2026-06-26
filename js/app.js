@@ -13,13 +13,34 @@ const App = (() => {
     Store.save(userId, db);                                   // caché local (instantáneo, offline)
     if (Cloud.enabled()) { clearTimeout(syncT); syncT = setTimeout(() => Cloud.saveData(userId, db).catch(() => {}), 800); } // respaldo en la nube (con pausa)
   }
+  const REC_KEYS = ['expenses', 'harvests', 'orders', 'clients', 'tasks', 'irrigations', 'applications', 'inventory', 'log', 'notes'];
+  function countRecords(d) { return d ? REC_KEYS.reduce((s, k) => s + ((d[k] || []).length), 0) : 0; }
+  // Busca datos de versiones anteriores (guardados solo en el dispositivo) para recuperarlos.
+  function findLegacyData() {
+    let best = null, bestN = 0;
+    try {
+      for (const k of Object.keys(localStorage)) {
+        if (k === 'agrofin_cache__' + userId) continue; // la caché de esta misma cuenta ya se consideró
+        if (k === 'inverna_v1' || k.indexOf('inverna_db__') === 0 || k.indexOf('agrofin_cache__') === 0) {
+          try { const d = JSON.parse(localStorage.getItem(k)); const n = countRecords(d); if (n > bestN) { bestN = n; best = d; } } catch (e) {}
+        }
+      }
+    } catch (e) {}
+    return bestN > 0 ? best : null;
+  }
   async function loadUser() {
     let data = null;
     if (Cloud.enabled()) { try { data = await Cloud.loadData(userId); } catch (e) {} }
     if (data == null) data = Store.load(userId);             // si la nube falla/offline, usa la caché
+    if (countRecords(data) === 0) { const legacy = findLegacyData(); if (legacy) data = legacy; } // recupera datos viejos del dispositivo
     db = { ...Store.empty(), ...(data || {}) };
     Store.save(userId, db);
-    if (Cloud.enabled() && data == null) { Cloud.saveData(userId, db).catch(() => {}); } // crea la fila en la nube
+    if (Cloud.enabled()) { Cloud.saveData(userId, db).catch(() => {}); } // respalda en la nube (incluye lo recuperado)
+  }
+  function flushSync() { // sube de inmediato lo pendiente (al cerrar / cambiar de app)
+    if (!userId || !Cloud.enabled()) return;
+    clearTimeout(syncT);
+    Cloud.saveData(userId, db).catch(() => {});
   }
   async function boot() {
     Cloud.init();
@@ -379,6 +400,10 @@ const App = (() => {
 
   document.addEventListener('DOMContentLoaded', boot);
   if (document.readyState !== 'loading') boot();
+
+  // Respaldar en la nube al cerrar la app o cambiar de pestaña (evita perder lo recién capturado).
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSync(); });
+  window.addEventListener('pagehide', flushSync);
 
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
