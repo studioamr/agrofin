@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- AVATAR / FOTO DE PERFIL (IG + TikTok) — el brote de ABONO -->
+  <defs>
+    <radialGradient id="disc" cx="36%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#5fd06a"/><stop offset="1" stop-color="#138a4b"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="#eef6ec"/>
+  <circle cx="540" cy="567" r="354" fill="#0a3a1e" opacity=".13"/>
+  <circle cx="540" cy="540" r="354" fill="url(#disc)"/>
+  <ellipse cx="438" cy="405" rx="168" ry="101" fill="#ffffff" opacity=".18"/>
+  <path d="M540 725 V540" stroke="#ffffff" stroke-width="50" stroke-linecap="round"/>
+  <path d="M540 607 C422 607 354 523 354 405 C489 405 540 489 540 607 Z" fill="#ffffff"/>
+  <path d="M540 540 C658 540 726 456 726 338 C591 338 540 422 540 540 Z" fill="#ffffff"/>
+</svg>

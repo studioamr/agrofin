@@ -49,9 +49,16 @@ Claude la creará como tarea programada (igual que la de PARFECT de las 9:47 AM)
 ## Archivos de esta carpeta
 | Archivo | Qué es |
 |---|---|
-| `MARCA.md` | Identidad: posicionamiento, taglines, pilares, voz, sistema visual |
-| `PLAN-LANZAMIENTO.md` | Playbook de 30 días para los primeros 10 invernaderos |
+| `BRAND.md` | Brand bible de 1 página (esencia, voz, paleta, lenguajes visuales, do/don't) |
+| `MARCA.md` | Identidad extendida: posicionamiento, taglines, pilares, pitches |
+| `INSTAGRAM.md` | Perfil, grid, 12 posts de lanzamiento, stories, highlights |
+| `REELS-TIKTOK.md` | 12 guiones de video + perfil TikTok + reglas |
+| `CALENDARIO-30-DIAS.md` | Plan día por día del primer mes en redes |
+| `PLAN-LANZAMIENTO.md` | Playbook de 30 días para los primeros 10 invernaderos (WhatsApp warm) |
 | `MENSAJES.md` | Todo el copy listo para copiar/pegar (1:1, grupos, tiendas, objeciones) |
 | `OPERACION.md` | Este archivo — la rutina y las reglas |
 | `seguimiento.csv` | El tablero: quién va en qué estado |
+| `plantillas/` | SVG/PNG 1080×1080: avatar, post-dato, post-cita, post-drop |
 | `../ABONO-MAESTRO.md` | Documento maestro del proyecto completo (producto + infra + negocio) |
+
+**Nota para la rutina semanal:** si André ya abrió las cuentas (@abono.app), la tanda de la semana también incluye preparar los posts que tocan según `CALENDARIO-30-DIAS.md` (editar la plantilla SVG que corresponda, regenerar el PNG con `qlmanage -t -s 1080 -o . archivo.svg` y dejar caption listo). El arrastre/publicación es de André, como en PARFECT.

@@ -1,0 +1,20 @@
+<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- POST "LA CITA" — dicho de productor. Edita las líneas de la cita -->
+  <rect width="1080" height="1080" fill="#152619"/>
+  <!-- comillas en ámbar -->
+  <text x="110" y="330" font-size="220" font-weight="900" fill="#c4790f">“</text>
+  <!-- cita (EDITAR) -->
+  <text x="120" y="470" font-size="66" font-weight="900" fill="#eef3ea">El que no lleva</text>
+  <text x="120" y="560" font-size="66" font-weight="900" fill="#eef3ea">cuentas, trabaja</text>
+  <text x="120" y="650" font-size="66" font-weight="900" fill="#eef3ea">de a gratis</text>
+  <text x="120" y="740" font-size="66" font-weight="900" fill="#eef3ea">y ni se entera.</text>
+  <!-- atribución -->
+  <text x="120" y="840" font-size="36" font-weight="600" fill="#7a9085">— dicho de productor</text>
+  <!-- footer marca -->
+  <circle cx="152" cy="985" r="34" fill="#168a4b"/>
+  <path d="M152 1005 V985" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M152 992 C138 992 130 982 130 968 C146 968 152 978 152 992 Z" fill="#ffffff"/>
+  <path d="M152 985 C166 985 174 975 174 961 C158 961 152 971 152 985 Z" fill="#ffffff"/>
+  <text x="210" y="997" font-size="42" font-weight="900" font-style="italic" letter-spacing="3" fill="#eef3ea">ABONO</text>
+  <text x="1000" y="997" font-size="30" font-weight="700" fill="#7a9085" text-anchor="end">Sabe si ganaste.</text>
+</svg>

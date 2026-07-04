@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- POST "EL DATO" — edita las 3 líneas de texto por post -->
+  <rect width="1080" height="1080" fill="#eef3ea"/>
+  <!-- tarjeta blanca -->
+  <rect x="80" y="150" width="920" height="780" rx="40" fill="#ffffff" stroke="#d7e2d5" stroke-width="2"/>
+  <rect x="80" y="150" width="920" height="14" rx="7" fill="#168a4b"/>
+  <!-- eyebrow -->
+  <text x="150" y="280" font-size="34" font-weight="800" letter-spacing="6" fill="#51655a">EL DATO</text>
+  <!-- pregunta / dato principal (EDITAR) -->
+  <text x="150" y="430" font-size="76" font-weight="900" fill="#152619">¿Sabes cuánto te</text>
+  <text x="150" y="530" font-size="76" font-weight="900" fill="#152619">costó producir</text>
+  <text x="150" y="630" font-size="76" font-weight="900" fill="#168a4b">cada kilo?</text>
+  <!-- apoyo (EDITAR) -->
+  <text x="150" y="750" font-size="38" font-weight="600" fill="#51655a">La mayoría no lo sabe.</text>
+  <text x="150" y="805" font-size="38" font-weight="600" fill="#51655a">Y ahí se va la ganancia.</text>
+  <!-- footer marca -->
+  <circle cx="172" cy="990" r="34" fill="#168a4b"/>
+  <path d="M172 1010 V990" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M172 997 C158 997 150 987 150 973 C166 973 172 983 172 997 Z" fill="#ffffff"/>
+  <path d="M172 990 C186 990 194 980 194 966 C178 966 172 976 172 990 Z" fill="#ffffff"/>
+  <text x="230" y="1002" font-size="42" font-weight="900" font-style="italic" letter-spacing="3" fill="#152619">ABONO</text>
+  <text x="1000" y="1002" font-size="30" font-weight="700" fill="#51655a" text-anchor="end">Sabe si ganaste.</text>
+</svg>
