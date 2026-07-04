@@ -1,0 +1,25 @@
+<svg viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <!-- SLIDE 2 — HISTORIA (ficha de campo sobre café) -->
+  <rect width="1080" height="1920" fill="#2E2014"/>
+  <rect x="90" y="90" width="900" height="1740" fill="none" stroke="#D9A03F" stroke-width="3"/>
+  <rect x="112" y="112" width="856" height="1696" fill="none" stroke="#D9A03F" stroke-width="1"/>
+
+  <text x="170" y="320" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" letter-spacing="10" fill="#D9A03F">FICHA DE CAMPO · No. 01</text>
+  <line x1="170" y1="370" x2="910" y2="370" stroke="#D9A03F" stroke-width="1" stroke-dasharray="10 10"/>
+
+  <text x="170" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="92" font-weight="900" fill="#FBF6EA">Mi tío llevaba</text>
+  <text x="170" y="730" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="92" font-weight="900" fill="#FBF6EA">20 años en una</text>
+  <text x="170" y="840" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="92" font-weight="900" font-style="italic" fill="#D9A03F">libreta.</text>
+
+  <text x="170" y="1010" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="900" fill="#FBF6EA">Un día se le</text>
+  <text x="170" y="1100" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="900" fill="#FBF6EA">perdió.</text>
+
+  <text x="170" y="1290" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="900" fill="#FBF6EA">Por eso hicimos</text>
+  <text x="170" y="1380" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="92" font-weight="900" font-style="italic" fill="#B44A24">ABONO.</text>
+
+  <line x1="170" y1="1500" x2="910" y2="1500" stroke="#D9A03F" stroke-width="1" stroke-dasharray="10 10"/>
+  <text x="170" y="1600" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" fill="#a8926e">MICHOACAN · JITOMATE SALADET</text>
+
+  <text x="170" y="1730" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="52" font-weight="900" font-style="italic" fill="#FBF6EA">ABONO</text>
+  <text x="910" y="1730" text-anchor="end" font-family="'IBM Plex Mono','Courier New',monospace" font-size="30" letter-spacing="4" fill="#D9A03F">desliza →</text>
+</svg>
