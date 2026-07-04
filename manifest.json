@@ -1,6 +1,6 @@
 {
-  "name": "AGROFIN — Control de tu invernadero",
-  "short_name": "AGROFIN",
+  "name": "ABONO — Control de tu invernadero",
+  "short_name": "ABONO",
   "description": "Gastos, producción, cortes y clientes de tu invernadero, en tu teléfono.",
   "start_url": "./index.html",
   "display": "standalone",

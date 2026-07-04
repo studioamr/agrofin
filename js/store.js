@@ -1,6 +1,6 @@
-/* ============ AGROFIN · Caché local por cuenta (offline). La auth/respaldo va por la nube (cloud.js) ============ */
+/* ============ ABONO · Caché local por cuenta (offline). La auth/respaldo va por la nube (cloud.js) ============ */
 const Store = (() => {
-  const dkey = uid => 'agrofin_cache__' + uid;
+  const dkey = uid => 'abono_cache__' + uid;
   const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 
   const empty = () => ({

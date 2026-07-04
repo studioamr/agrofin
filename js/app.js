@@ -16,12 +16,12 @@ const App = (() => {
   }
   const REC_KEYS = ['expenses', 'harvests', 'orders', 'clients', 'tasks', 'irrigations', 'applications', 'inventory', 'log', 'notes'];
   function countRecords(d) { return d ? REC_KEYS.reduce((s, k) => s + ((d[k] || []).length), 0) : 0; }
-  // Busca datos de versiones ANTERIORES (guardados solo en el dispositivo, antes de la nube) para recuperarlos.
+  // Busca datos de versiones ANTERIORES (guardados solo en el dispositivo, antes de la nube, o de cuando la app se llamaba AGROFIN/INVERNA) para recuperarlos.
   function findLegacyData() {
     let best = null, bestN = 0;
     try {
       for (const k of Object.keys(localStorage)) {
-        if (k === 'inverna_v1' || k.indexOf('inverna_db__') === 0) {
+        if (k === 'inverna_v1' || k.indexOf('inverna_db__') === 0 || k.indexOf('agrofin_cache__') === 0) {
           try { const d = JSON.parse(localStorage.getItem(k)); const n = countRecords(d); if (n > bestN) { bestN = n; best = d; } } catch (e) {}
         }
       }
@@ -58,7 +58,7 @@ const App = (() => {
         const u = await Cloud.sessionUser();
         if (u) {
           userId = u.id; userEmail = u.email || ''; await loadUser(); route = 'home';
-          if (confirmed) { try { history.replaceState(null, '', location.pathname); } catch (e) {} setTimeout(() => UI.toast('¡Correo confirmado! Bienvenido a AGROFIN'), 350); }
+          if (confirmed) { try { history.replaceState(null, '', location.pathname); } catch (e) {} setTimeout(() => UI.toast('¡Correo confirmado! Bienvenido a ABONO'), 350); }
         }
       } catch (e) {}
     }
@@ -394,7 +394,7 @@ const App = (() => {
         const cy = db.cycle || {}, c = Q.cycleSummary(cy);
         const esc = v => { v = (v == null ? '' : String(v)); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
         const L = []; const row = (...a) => L.push(a.map(esc).join(','));
-        row('AGROFIN · Resumen del ciclo agrícola');
+        row('ABONO · Resumen del ciclo agrícola');
         row('Ciclo', cy.name || ''); row('Cultivo', cy.crop || ''); row('Variedad', cy.variety || '');
         row('Inicio', cy.start || ''); row('Fin', cy.end || 'En curso');
         row('');

@@ -1,4 +1,4 @@
-/* ============ AGROFIN · Nube (Supabase): auth + respaldo de datos ============ */
+/* ============ ABONO · Nube (Supabase): auth + respaldo de datos ============ */
 const Cloud = (() => {
   const URL_ = 'https://fnxifbddgjyzwrolprel.supabase.co';
   const KEY_ = 'sb_publishable_w7oXdy379pRmyYfrtmdwWA_s0GcNacO';

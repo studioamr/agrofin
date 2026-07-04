@@ -1,4 +1,4 @@
-/* ============ AGROFIN · Vista Resumen (dashboard) ============ */
+/* ============ ABONO · Vista Resumen (dashboard) ============ */
 window.Views = window.Views || {};
 
 (function (V) {
@@ -45,7 +45,7 @@ window.Views = window.Views || {};
 
     const phone = inner => `<div class="phone"><div class="phone-screen"><span class="phone-notch"></span>${inner}</div></div>`;
     const s1 = `<div class="pm">
-      <div class="pm-top">AGROFIN</div>
+      <div class="pm-top">ABONO</div>
       <div class="pm-card"><div class="pm-eyebrow">Utilidad del mes</div><div class="pm-big">$20,800</div>
         <div class="pm-split"><span><i>Ventas</i><b class="pos">$37,920</b></span><span><i>Gastos</i><b class="neg">$17,120</b></span></div></div>
       <div class="pm-grid">
@@ -79,7 +79,7 @@ window.Views = window.Views || {};
 
     return `<div class="lnd">
       <section class="lnd-hero">
-        <h1 class="lnd-logo">AGROFIN</h1>
+        <h1 class="lnd-logo">ABONO</h1>
         <div class="lnd-tag">Control de tu invernadero</div>
         <div class="lnd-meta">Gastos · Trabajos · Riego · Producción · Ventas</div>
         <span class="lnd-beta">Beta</span>
@@ -122,14 +122,14 @@ window.Views = window.Views || {};
 
         <div class="lnd-card2">
           <div class="lnd-c2-t">${UI.icon('trendUp')} Sabe si ganaste</div>
-          <p class="lnd-c2-d">AGROFIN junta tus ventas y tus gastos del mes y te muestra tu <b>utilidad</b> de un vistazo.</p>
+          <p class="lnd-c2-d">ABONO junta tus ventas y tus gastos del mes y te muestra tu <b>utilidad</b> de un vistazo.</p>
         </div>
 
         <button class="btn btn-primary lnd-cta2" data-act="goAuth" data-mode="signup">${UI.icon('check')} Crear cuenta gratis</button>
 
         <div class="lnd-foot">
           ${UI.logo(30)}
-          <div class="lnd-foot-t">AGROFIN · v1 · Hecho para tu invernadero</div>
+          <div class="lnd-foot-t">ABONO · v1 · Hecho para tu invernadero</div>
           <div class="lnd-foot-s">${UI.icon('info', '', 13)} Tus datos se guardan solo en este teléfono.</div>
         </div>
       </section>
@@ -206,7 +206,7 @@ window.Views = window.Views || {};
 
     return `
     <div class="topbar">
-      <div><h1>AGROFIN</h1><div class="sub">${UI.esc(name)}</div></div>
+      <div><h1>ABONO</h1><div class="sub">${UI.esc(name)}</div></div>
       <div class="spacer"></div>
       <button class="iconbtn" data-act="openSettings" aria-label="Ajustes">${UI.icon('settings')}</button>
     </div>
@@ -294,7 +294,7 @@ window.Views = window.Views || {};
       </div>
 
       <div class="center mt20">${UI.logo(26)}
-        <div class="tiny muted mt4">AGROFIN · v1 · Hecho para tu invernadero</div>
+        <div class="tiny muted mt4">ABONO · v1 · Hecho para tu invernadero</div>
         <div class="tiny muted2 mt4">${UI.icon('info', '', 11)} Tus datos se guardan solo en este teléfono</div></div>`;
   };
 })(window.Views);

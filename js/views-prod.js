@@ -1,4 +1,4 @@
-/* ============ INVERNA/AGROFIN · Producción: Más hub + Trabajos, Riego, Aplicaciones, Inventario ============ */
+/* ============ INVERNA/ABONO · Producción: Más hub + Trabajos, Riego, Aplicaciones, Inventario ============ */
 window.Views = window.Views || {};
 
 (function (V) {
