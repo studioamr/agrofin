@@ -1,0 +1,19 @@
+<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="t" d="M 200 540 A 340 340 0 0 1 880 540" fill="none"/>
+    <path id="b" d="M 205 540 A 335 335 0 0 0 875 540" fill="none"/>
+  </defs>
+  <rect width="1080" height="1080" fill="#F2EAD9"/>
+  <g transform="rotate(-5 540 540)" font-family="'IBM Plex Mono','Courier New',monospace" font-weight="700">
+    <circle cx="540" cy="540" r="430" fill="none" stroke="#B44A24" stroke-width="20"/>
+    <circle cx="540" cy="540" r="392" fill="none" stroke="#B44A24" stroke-width="5"/>
+    <circle cx="540" cy="540" r="270" fill="none" stroke="#B44A24" stroke-width="5"/>
+    <text font-size="58" letter-spacing="10" fill="#B44A24"><textPath href="#t" startOffset="50%" text-anchor="middle">ABONO · CONTROL</textPath></text>
+    <text font-size="52" letter-spacing="10" fill="#B44A24"><textPath href="#b" startOffset="50%" text-anchor="middle">EST. 2026 · MICHOACÁN</textPath></text>
+    <circle cx="235" cy="540" r="8" fill="#B44A24"/>
+    <circle cx="845" cy="540" r="8" fill="#B44A24"/>
+    <path d="M540 720 V545" stroke="#B44A24" stroke-width="28" stroke-linecap="round"/>
+    <path d="M540 615 C432 615 370 537 370 429 C494 429 540 507 540 615 Z" fill="none" stroke="#B44A24" stroke-width="22" stroke-linejoin="round"/>
+    <path d="M540 545 C648 545 710 467 710 359 C586 359 540 437 540 545 Z" fill="none" stroke="#B44A24" stroke-width="22" stroke-linejoin="round"/>
+  </g>
+</svg>
