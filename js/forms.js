@@ -190,14 +190,18 @@ const Forms = (() => {
       + saveBtn('saveInv', i.id, isEdit ? 'Guardar cambios' : 'Guardar artículo');
   }
 
-  /* ---------------- ciclo ---------------- */
-  function cycle(c = {}) {
-    return head('Ciclo de producción')
-      + f('Nombre del ciclo', inp('cy-name', 'placeholder="Ej. Ciclo actual"', c.name))
+  /* ---------------- ciclo agrícola ---------------- */
+  function cycle(c = {}, isNew) {
+    return head(isNew ? 'Nuevo ciclo agrícola' : 'Ciclo agrícola')
+      + f('Nombre del ciclo', inp('cy-name', 'placeholder="Ej. Ciclo 2026-B"', c.name))
       + f('Cultivo', inp('cy-crop', 'placeholder="Ej. Jitomate saladet"', c.crop))
       + f('Variedad / semilla', inp('cy-variety', 'placeholder="Ej. Mosquetero"', c.variety))
-      + f('Inicio del ciclo', inp('cy-start', 'type="date"', c.start))
-      + saveBtn('saveCycle', '', 'Guardar ciclo');
+      + `<div class="row gap8">
+          ${f('Inicio', inp('cy-start', 'type="date"', c.start))}
+          ${f('Fin (opcional)', inp('cy-end', 'type="date"', c.end))}
+        </div>`
+      + `<span class="fhint">Los ciclos son de duración variable (jitomate, aguacate…). Deja "Fin" vacío si sigue en curso. Solo se suman aquí los gastos y ventas con fecha dentro de este rango.</span>`
+      + saveBtn(isNew ? 'saveNewCycle' : 'saveCycle', '', isNew ? 'Empezar ciclo' : 'Guardar ciclo');
   }
 
   return { expense, harvest, client, order, payment, log, note, task, irrigation, application, invItem, cycle, getPhotos, setPhotos, thumbs };

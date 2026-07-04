@@ -15,13 +15,13 @@ window.Views = window.Views || {};
     <div class="topbar"><div><h1>Más</h1><div class="sub">Ciclo y controles</div></div></div>
 
     <div class="card mt8 tap" data-act="openCycle">
-      <div class="row between"><span class="eyebrow">Ciclo de producción</span>${UI.icon('edit', '', 16)}</div>
+      <div class="row between"><span class="eyebrow">Ciclo agrícola</span>${UI.icon('edit', '', 16)}</div>
       <div class="h2 mt4">${UI.esc(cy.crop || 'Sin definir')}</div>
-      <div class="small muted">${cy.variety ? 'Semilla ' + UI.esc(cy.variety) : ''}${cy.start ? ' · desde ' + UI.dateLong(cy.start) : ''}</div>
+      <div class="small muted">${cy.variety ? 'Semilla ' + UI.esc(cy.variety) : ''}${cy.start ? ' · ' + UI.date(cy.start) + ' – ' + (cy.end ? UI.date(cy.end) : 'en curso') : ''}</div>
     </div>
 
     <div class="card mt12 list">
-      ${link('rentabilidad', 'chart', '#0e6c39', 'Rentabilidad del ciclo', 'Costo por kilo, utilidad y margen')}
+      ${link('rentabilidad', 'chart', '#0e6c39', 'Ciclo agrícola', 'Ventas − gastos, costo por kilo y margen')}
       ${link('tareas', 'tool', '#178a4b', 'Trabajos', 'Pendientes, en proceso, hechos · costo')}
       ${link('riego', 'droplet', '#3a92e0', 'Riego y fertirriego', 'Frecuencia, agua y fertirriego')}
       ${link('aplicaciones', 'flask', '#8a6df0', 'Aplicaciones foliares', 'Producto, dosis y costo')}
@@ -96,20 +96,28 @@ window.Views = window.Views || {};
     </div>`;
   };
 
-  /* ---------------- Rentabilidad del ciclo ---------------- */
+  /* ---------------- Ciclo agrícola (rentabilidad, acotada por fecha inicio–fin) ---------------- */
   V.rentabilidad = function () {
-    const c = Q.cycleSummary();
     const cy = App.db.cycle || {};
+    const c = Q.cycleSummary(cy);
     const profitColor = c.profit >= 0 ? 'var(--brand)' : 'var(--danger)';
     const maxCost = Math.max(c.gastos, c.trabajos, c.aplic, 1);
     const maxQ = c.byQ.length ? Math.max(...c.byQ.map(r => r.kg)) : 1;
     const m2 = n => '$' + (Math.round((n || 0) * 100) / 100).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const rango = cy.start ? `${UI.date(cy.start)} – ${cy.end ? UI.date(cy.end) : 'en curso'}` : 'Define las fechas del ciclo';
+    const hist = (App.db.cycles || []).slice().reverse();
     return `
-    <div class="topbar">${back}<div><h1>Rentabilidad</h1><div class="sub">${UI.esc(cy.crop || 'Ciclo')}${cy.variety ? ' · ' + UI.esc(cy.variety) : ''}</div></div>
-      <div class="spacer"></div><button class="iconbtn" data-act="exportCSV" aria-label="Exportar">${UI.icon('download')}</button></div>
+    <div class="topbar">${back}<div><h1>Ciclo agrícola</h1><div class="sub">${UI.esc(cy.crop || 'Sin definir')}${cy.variety ? ' · ' + UI.esc(cy.variety) : ''}</div></div>
+      <div class="spacer"></div><button class="iconbtn" data-act="openCycle" aria-label="Editar ciclo">${UI.icon('edit')}</button>
+      <button class="iconbtn" data-act="exportCSV" aria-label="Exportar">${UI.icon('download')}</button></div>
+
+    <div class="card mt8 tap" data-act="openCycle">
+      <div class="row between"><span class="eyebrow">${UI.esc(cy.name || 'Ciclo actual')}</span>${UI.icon('cal', '', 16)}</div>
+      <div class="small muted mt4">${rango}</div>
+    </div>
 
     <div class="balance-card mt8">
-      <span class="eyebrow">Utilidad del ciclo</span>
+      <span class="eyebrow">Ventas − Gastos del ciclo</span>
       <div class="bc-big" style="color:${profitColor}">${c.profit < 0 ? '−' : ''}${UI.money(Math.abs(c.profit))}</div>
       <div class="bc-split">
         <div><div class="bc-k">${UI.icon('trendUp')} Ventas</div><div class="bc-v pos">${UI.money(c.sales)}</div></div>
@@ -135,7 +143,39 @@ window.Views = window.Views || {};
     ${c.byQ.length ? `<div class="section-head mt20"><h3 class="h3">Producción por calidad</h3><span class="small muted">${UI.weight(c.kg)}</span></div>
       <div class="card mt8">${c.byQ.map(r => UI.bar(r.kg, maxQ, r.q.color, UI.dot(r.q.color) + r.q.label, UI.weight(r.kg))).join('')}</div>` : ''}
 
-    <button class="btn btn-ghost mt16" data-act="exportCSV">${UI.icon('download')} Exportar ciclo a Excel (.csv)</button>`;
+    <button class="btn btn-ghost mt16" data-act="exportCSV">${UI.icon('download')} Exportar ciclo a Excel (.csv)</button>
+    <button class="btn btn-ghost mt8" data-act="closeCycle">${UI.icon('checkc')} Cerrar ciclo y empezar uno nuevo</button>
+
+    ${hist.length ? `<div class="section-head mt20"><h3 class="h3">Ciclos anteriores</h3></div>
+      <div class="card mt8 list">${hist.map(h => `<div class="lrow tap" data-act="viewCycle" data-id="${h.id}">
+        <span class="lic" style="color:#6b7d72;background:${UI.hexA('#6b7d72', .12)}">${UI.icon('cal', '', 17)}</span>
+        <div class="grow"><div class="lt">${UI.esc(h.name || h.crop || 'Ciclo')}</div><div class="ls">${UI.esc(h.crop || '')}${h.start ? ' · ' + UI.date(h.start) + ' – ' + (h.end ? UI.date(h.end) : '—') : ''}</div></div>
+        <span class="muted2">${UI.icon('chevron', '', 16)}</span>
+      </div>`).join('')}</div>` : ''}`;
+  };
+
+  /* ---------------- ficha de un ciclo cerrado (historial) ---------------- */
+  V.cycleSheet = function (cy) {
+    const c = Q.cycleSummary(cy);
+    const profitColor = c.profit >= 0 ? 'var(--brand)' : 'var(--danger)';
+    const rango = cy.start ? `${UI.date(cy.start)} – ${cy.end ? UI.date(cy.end) : '—'}` : '';
+    return `<div class="sheet-head"><div class="h2">${UI.esc(cy.name || cy.crop || 'Ciclo')}</div>
+      <button class="iconbtn danger" data-act="delCycle" data-id="${cy.id}">${UI.icon('trash')}</button></div>
+    <div class="small muted mb12">${UI.esc(cy.crop || '')}${cy.variety ? ' · ' + UI.esc(cy.variety) : ''}${rango ? ' · ' + rango : ''}</div>
+    <div class="balance-card">
+      <span class="eyebrow">Ventas − Gastos</span>
+      <div class="bc-big" style="color:${profitColor}">${c.profit < 0 ? '−' : ''}${UI.money(Math.abs(c.profit))}</div>
+      <div class="bc-split">
+        <div><div class="bc-k">${UI.icon('trendUp')} Ventas</div><div class="bc-v pos">${UI.money(c.sales)}</div></div>
+        <div class="bc-div"></div>
+        <div><div class="bc-k">${UI.icon('money')} Inversión</div><div class="bc-v neg">${UI.money(c.costs)}</div></div>
+      </div>
+    </div>
+    <div class="stat-grid mt12">
+      <div class="stat" style="--c:#178a4b"><div class="stat-ic">${UI.icon('sprout', '', 18)}</div><div class="stat-val">${UI.weight(c.kg)}</div><div class="stat-lbl">Producción</div></div>
+      <div class="stat" style="--c:#8a6df0"><div class="stat-ic">${UI.icon('chart', '', 18)}</div><div class="stat-val">${Math.round(c.margin * 100)}%</div><div class="stat-lbl">Margen</div></div>
+    </div>
+    <button class="btn btn-ghost mt16" data-act="closeSheet">Cerrar</button>`;
   };
 
   /* ---------------- Inventario ---------------- */

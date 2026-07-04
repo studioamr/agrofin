@@ -60,17 +60,22 @@ const Q = (() => {
   // ---- inventario ----
   function invBy(kind) { return db().inventory.filter(i => i.kind === kind).slice().sort((a, b) => a.name.localeCompare(b.name)); }
 
-  // ---- resumen del ciclo (todo el historial, no por mes) ----
-  function cycleSummary() {
-    const gastos = sum(db().expenses, x => x.amount);
-    const trabajos = sum(db().tasks, x => x.cost || 0);
-    const aplic = sum(db().applications, x => x.cost || 0);
+  // ---- resumen de un ciclo agrícola (ciclos son de duración variable: se acota por fecha inicio–fin) ----
+  const inCycle = (arr, cy) => { const s = (cy && cy.start) || '0000-01-01', e = (cy && cy.end) || '9999-12-31'; return arr.filter(x => x.date >= s && x.date <= e); };
+  function cycleSummary(cycle) {
+    const cy = cycle || db().cycle || {};
+    const expenses = inCycle(db().expenses, cy), harvests = inCycle(db().harvests, cy);
+    const tasks = inCycle(db().tasks, cy), applications = inCycle(db().applications, cy);
+    const orders = inCycle(db().orders, cy);
+    const gastos = sum(expenses, x => x.amount);
+    const trabajos = sum(tasks, x => x.cost || 0);
+    const aplic = sum(applications, x => x.cost || 0);
     const costs = gastos + trabajos + aplic;
-    const kg = sum(db().harvests, x => x.kg);
-    const entregados = db().orders.filter(o => o.status === 'entregado');
+    const kg = sum(harvests, x => x.kg);
+    const entregados = orders.filter(o => o.status === 'entregado');
     const sales = sum(entregados, x => x.total);
     const kgSold = sum(entregados, x => x.kg);
-    const byQ = Data.QUALITIES.map(q => ({ q, kg: sum(db().harvests.filter(h => h.quality === q.id), x => x.kg) })).filter(r => r.kg > 0);
+    const byQ = Data.QUALITIES.map(q => ({ q, kg: sum(harvests.filter(h => h.quality === q.id), x => x.kg) })).filter(r => r.kg > 0);
     return {
       gastos, trabajos, aplic, costs, kg, byQ, sales, kgSold,
       profit: sales - costs,
@@ -97,6 +102,6 @@ const Q = (() => {
     clientOrders, clientBalance, clientTotalSold, clientById, clientName,
     tasksAll, tasksBy, taskCount, tasksCost,
     irrigMonth, waterMonth, fertMonth, appsMonth, appsCost, invBy,
-    cycleSummary, monthSummary,
+    cycleSummary, monthSummary, inCycle,
   };
 })();

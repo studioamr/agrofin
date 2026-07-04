@@ -311,9 +311,27 @@ const App = (() => {
     },
     delNote: el => confirmDel('notes', el.dataset.id, 'esta nota'),
 
-    /* ---- ciclo ---- */
+    /* ---- ciclo agrícola ---- */
     openCycle: () => UI.sheet(Forms.cycle(db.cycle || {})),
-    saveCycle() { db.cycle = { name: val('cy-name') || 'Ciclo actual', crop: val('cy-crop'), variety: val('cy-variety'), start: val('cy-start') }; save(); UI.closeSheet(); UI.toast('Ciclo guardado'); render(); },
+    saveCycle() {
+      const id = (db.cycle && db.cycle.id) || Store.uid();
+      db.cycle = { id, name: val('cy-name') || 'Ciclo actual', crop: val('cy-crop'), variety: val('cy-variety'), start: val('cy-start'), end: val('cy-end') };
+      save(); UI.closeSheet(); UI.toast('Ciclo guardado'); render();
+    },
+    closeCycle: () => UI.modal(`<div class="h3 mb8">¿Cerrar este ciclo y empezar uno nuevo?</div><p class="muted small mb16">El ciclo actual pasa al historial (sus números quedan guardados). Los gastos y ventas que ya anotaste NO se borran; solo dejarán de contarse en el ciclo nuevo si quedan fuera de sus fechas.</p>
+      <div class="btn-row"><button class="btn btn-ghost" data-act="closeSheet">Cancelar</button><button class="btn btn-primary" data-act="doCloseCycle">Empezar ciclo nuevo</button></div>`),
+    doCloseCycle() {
+      if (!db.cycles) db.cycles = [];
+      if (db.cycle && db.cycle.crop) db.cycles.push({ ...db.cycle, id: db.cycle.id || Store.uid() });
+      db.cycle = { id: Store.uid(), name: '', crop: (db.cycle && db.cycle.crop) || '', variety: (db.cycle && db.cycle.variety) || '', start: UI.todayISO(), end: '' };
+      UI.sheet(Forms.cycle(db.cycle, true));
+    },
+    saveNewCycle() {
+      db.cycle = { id: db.cycle.id, name: val('cy-name') || 'Ciclo actual', crop: val('cy-crop'), variety: val('cy-variety'), start: val('cy-start'), end: val('cy-end') };
+      save(); UI.closeSheet(); UI.toast('¡Nuevo ciclo iniciado!'); go('rentabilidad');
+    },
+    viewCycle: el => { const cy = db.cycles.find(c => c.id === el.dataset.id); if (cy) UI.sheet(Views.cycleSheet(cy)); },
+    delCycle: el => confirmDel('cycles', el.dataset.id, 'este ciclo del historial'),
 
     /* ---- trabajos ---- */
     setTaskFilter: el => { state.taskFilter = el.dataset.v; render(); },
@@ -373,11 +391,12 @@ const App = (() => {
     delProduct(el) { db.products = db.products.filter(x => x !== el.dataset.v); save(); UI.sheet(Views.settings()); },
     exportCSV() {
       try {
-        const c = Q.cycleSummary(), cy = db.cycle || {};
+        const cy = db.cycle || {}, c = Q.cycleSummary(cy);
         const esc = v => { v = (v == null ? '' : String(v)); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
         const L = []; const row = (...a) => L.push(a.map(esc).join(','));
-        row('AGROFIN · Resumen del ciclo');
-        row('Ciclo', cy.name || ''); row('Cultivo', cy.crop || ''); row('Variedad', cy.variety || ''); row('Inicio', cy.start || '');
+        row('AGROFIN · Resumen del ciclo agrícola');
+        row('Ciclo', cy.name || ''); row('Cultivo', cy.crop || ''); row('Variedad', cy.variety || '');
+        row('Inicio', cy.start || ''); row('Fin', cy.end || 'En curso');
         row('');
         row('Concepto', 'Monto');
         row('Gastos y compras', Math.round(c.gastos));
@@ -394,22 +413,22 @@ const App = (() => {
         row('Margen %', Math.round(c.margin * 100));
         row('');
         row('GASTOS'); row('Fecha', 'Categoría', 'Concepto', 'Monto');
-        Q.byDateDesc(db.expenses).forEach(e => row(e.date, Data.catOf(e.cat).label, e.concept, e.amount));
+        Q.byDateDesc(Q.inCycle(db.expenses, cy)).forEach(e => row(e.date, Data.catOf(e.cat).label, e.concept, e.amount));
         row('');
         row('TRABAJOS'); row('Fecha', 'Trabajo', 'Estado', 'Costo');
-        Q.byDateDesc(db.tasks).forEach(t => row(t.date, t.title, Data.stOf(t.status).label, t.cost || 0));
+        Q.byDateDesc(Q.inCycle(db.tasks, cy)).forEach(t => row(t.date, t.title, Data.stOf(t.status).label, t.cost || 0));
         row('');
         row('APLICACIONES FOLIARES'); row('Fecha', 'Producto', 'Dosis', 'Costo');
-        Q.byDateDesc(db.applications).forEach(a => row(a.date, a.product, a.dose, a.cost || 0));
+        Q.byDateDesc(Q.inCycle(db.applications, cy)).forEach(a => row(a.date, a.product, a.dose, a.cost || 0));
         row('');
         row('RIEGOS'); row('Fecha', 'Min', 'Agua', 'Unidad', 'Fertirriego', 'Unidad');
-        Q.byDateDesc(db.irrigations).forEach(r => row(r.date, r.minutes || 0, r.water || 0, r.wunit || '', r.fert || 0, r.funit || ''));
+        Q.byDateDesc(Q.inCycle(db.irrigations, cy)).forEach(r => row(r.date, r.minutes || 0, r.water || 0, r.wunit || '', r.fert || 0, r.funit || ''));
         row('');
         row('CORTES'); row('Fecha', 'Cultivo', 'Calidad', 'kg');
-        Q.byDateDesc(db.harvests).forEach(h => row(h.date, h.product, Data.qualOf(h.quality).label, h.kg));
+        Q.byDateDesc(Q.inCycle(db.harvests, cy)).forEach(h => row(h.date, h.product, Data.qualOf(h.quality).label, h.kg));
         row('');
         row('VENTAS / PEDIDOS'); row('Fecha', 'Cliente', 'Cultivo', 'kg', 'Precio/kg', 'Total', 'Estado', 'Pagado');
-        Q.byDateDesc(db.orders).forEach(o => row(o.date, Q.clientName(o.clientId), o.product, o.kg, o.price, o.total, o.status, o.paid || 0));
+        Q.byDateDesc(Q.inCycle(db.orders, cy)).forEach(o => row(o.date, Q.clientName(o.clientId), o.product, o.kg, o.price, o.total, o.status, o.paid || 0));
         row('');
         row('INVENTARIO'); row('Tipo', 'Nombre', 'Cantidad', 'Unidad');
         db.inventory.forEach(i => row(Data.kindOf(i.kind).label, i.name, i.qty, i.unit || ''));

@@ -211,9 +211,9 @@ window.Views = window.Views || {};
       <button class="iconbtn" data-act="openSettings" aria-label="Ajustes">${UI.icon('settings')}</button>
     </div>
 
-    ${App.db.cycle && App.db.cycle.crop ? `<div class="cycle-banner" data-act="go" data-route="mas">
+    ${App.db.cycle && App.db.cycle.crop ? `<div class="cycle-banner" data-act="go" data-route="rentabilidad">
       <span class="cb-ic">${UI.icon('sprout', '', 17)}</span>
-      <div class="grow"><div class="cb-t">${UI.esc(App.db.cycle.crop)}</div><div class="cb-s">${App.db.cycle.variety ? 'Semilla ' + UI.esc(App.db.cycle.variety) : ''}${App.db.cycle.start ? ' · desde ' + UI.date(App.db.cycle.start) : ''}</div></div>
+      <div class="grow"><div class="cb-t">${UI.esc(App.db.cycle.crop)}</div><div class="cb-s">${App.db.cycle.variety ? 'Semilla ' + UI.esc(App.db.cycle.variety) + ' · ' : ''}${App.db.cycle.start ? UI.date(App.db.cycle.start) + ' – ' + (App.db.cycle.end ? UI.date(App.db.cycle.end) : 'en curso') : 'Define las fechas'}</div></div>
       ${Q.taskCount('pendiente') > 0 ? `<span class="badge warn">${Q.taskCount('pendiente')} pend.</span>` : ''}${UI.icon('chevron', '', 16)}
     </div>` : ''}
 

@@ -93,7 +93,7 @@ const Data = (() => {
       { id: Store.uid(), title: 'Pendientes', text: 'Cotizar plástico nuevo para túnel 2.\nLlamar al técnico del pozo.', updatedAt: Date.now() },
     ];
 
-    db.cycle = { crop: 'Jitomate saladet', variety: 'Mosquetero', start: D(60), name: 'Ciclo actual' };
+    db.cycle = { id: Store.uid(), crop: 'Jitomate saladet', variety: 'Mosquetero', start: D(60), end: '', name: 'Ciclo actual' };
 
     db.tasks = [
       { id: Store.uid(), title: 'Tutoreo y bajado de planta', date: D(1), status: 'proceso',   cost: 1800, note: 'Surcos 1-6' },

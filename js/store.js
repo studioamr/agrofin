@@ -1,10 +1,12 @@
 /* ============ AGROFIN · Caché local por cuenta (offline). La auth/respaldo va por la nube (cloud.js) ============ */
 const Store = (() => {
   const dkey = uid => 'agrofin_cache__' + uid;
+  const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 
   const empty = () => ({
     meta: { name: 'Mi invernadero', area: '', cleared: false },
-    cycle: { crop: 'Jitomate saladet', variety: 'Mosquetero', start: '', name: 'Ciclo actual' },
+    cycle: { id: uid(), crop: 'Jitomate saladet', variety: 'Mosquetero', start: '', end: '', name: 'Ciclo actual' },
+    cycles: [],                                                // ciclos cerrados (historial): {id,name,crop,variety,start,end}
     products: ['Jitomate saladet'],
     expenses: [], harvests: [], clients: [], orders: [],
     tasks: [], irrigations: [], applications: [], inventory: [],
@@ -32,8 +34,6 @@ const Store = (() => {
     }
   }
   function wipe(uid) { try { localStorage.removeItem(dkey(uid)); } catch (e) {} }
-
-  const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 
   return { empty, load, save, wipe, uid };
 })();
