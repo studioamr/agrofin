@@ -1,0 +1,25 @@
+<svg viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <!-- SLIDE 1 — HOOK (ticket de báscula vertical) -->
+  <rect width="1080" height="1920" fill="#F2EAD9"/>
+  <rect x="120" y="300" width="840" height="1320" fill="#FBF6EA" stroke="#2E2014" stroke-width="4"/>
+  <line x1="120" y1="300" x2="960" y2="300" stroke="#2E2014" stroke-width="10" stroke-dasharray="22 14"/>
+  <line x1="120" y1="1620" x2="960" y2="1620" stroke="#2E2014" stroke-width="10" stroke-dasharray="22 14"/>
+
+  <text x="540" y="430" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="38" font-weight="700" letter-spacing="12" fill="#2E2014">ABONO · BASCULA DE DATOS</text>
+  <text x="540" y="495" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="30" letter-spacing="8" fill="#8a7a63">FOLIO 0001 · MICHOACAN, MX</text>
+  <line x1="200" y1="560" x2="880" y2="560" stroke="#2E2014" stroke-width="2" stroke-dasharray="12 10"/>
+
+  <text x="200" y="780" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" font-weight="900" fill="#2E2014">¿Sabes</text>
+  <text x="200" y="900" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" font-weight="900" fill="#2E2014">cuánto te</text>
+  <text x="200" y="1020" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" font-weight="900" fill="#2E2014">costó cada</text>
+  <text x="200" y="1140" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" font-weight="900" font-style="italic" fill="#B44A24">kilo?</text>
+
+  <line x1="200" y1="1230" x2="880" y2="1230" stroke="#2E2014" stroke-width="2" stroke-dasharray="12 10"/>
+  <text x="200" y="1330" font-family="'IBM Plex Mono','Courier New',monospace" font-size="40" fill="#2E2014">LA MAYORIA NO LO SABE.</text>
+  <text x="200" y="1395" font-family="'IBM Plex Mono','Courier New',monospace" font-size="40" fill="#2E2014">Y AHI SE VA LA GANANCIA.</text>
+
+  <text x="200" y="1540" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="56" font-weight="900" font-style="italic" fill="#2E2014">ABONO</text>
+  <text x="880" y="1540" text-anchor="end" font-family="'IBM Plex Mono','Courier New',monospace" font-size="30" letter-spacing="4" fill="#B44A24">SABE SI GANASTE.</text>
+
+  <text x="540" y="1750" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" letter-spacing="6" fill="#8a7a63">desliza →</text>
+</svg>

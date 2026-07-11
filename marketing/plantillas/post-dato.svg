@@ -1,23 +1,22 @@
-<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Inter, Helvetica, Arial, sans-serif">
-  <!-- POST "EL DATO" — edita las 3 líneas de texto por post -->
-  <rect width="1080" height="1080" fill="#eef3ea"/>
-  <!-- tarjeta blanca -->
-  <rect x="80" y="150" width="920" height="780" rx="40" fill="#ffffff" stroke="#d7e2d5" stroke-width="2"/>
-  <rect x="80" y="150" width="920" height="14" rx="7" fill="#168a4b"/>
-  <!-- eyebrow -->
-  <text x="150" y="280" font-size="34" font-weight="800" letter-spacing="6" fill="#51655a">EL DATO</text>
-  <!-- pregunta / dato principal (EDITAR) -->
-  <text x="150" y="430" font-size="76" font-weight="900" fill="#152619">¿Sabes cuánto te</text>
-  <text x="150" y="530" font-size="76" font-weight="900" fill="#152619">costó producir</text>
-  <text x="150" y="630" font-size="76" font-weight="900" fill="#168a4b">cada kilo?</text>
-  <!-- apoyo (EDITAR) -->
-  <text x="150" y="750" font-size="38" font-weight="600" fill="#51655a">La mayoría no lo sabe.</text>
-  <text x="150" y="805" font-size="38" font-weight="600" fill="#51655a">Y ahí se va la ganancia.</text>
-  <!-- footer marca -->
-  <circle cx="172" cy="990" r="34" fill="#168a4b"/>
-  <path d="M172 1010 V990" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
-  <path d="M172 997 C158 997 150 987 150 973 C166 973 172 983 172 997 Z" fill="#ffffff"/>
-  <path d="M172 990 C186 990 194 980 194 966 C178 966 172 976 172 990 Z" fill="#ffffff"/>
-  <text x="230" y="1002" font-size="42" font-weight="900" font-style="italic" letter-spacing="3" fill="#152619">ABONO</text>
-  <text x="1000" y="1002" font-size="30" font-weight="700" fill="#51655a" text-anchor="end">Sabe si ganaste.</text>
+<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- POST "TICKET" — el dato como recibo de báscula. Edita la pregunta y el folio -->
+  <rect width="1080" height="1080" fill="#F2EAD9"/>
+  <rect x="140" y="80" width="800" height="920" fill="#FBF6EA" stroke="#2E2014" stroke-width="3"/>
+  <line x1="140" y1="80" x2="940" y2="80" stroke="#2E2014" stroke-width="8" stroke-dasharray="18 12"/>
+  <line x1="140" y1="1000" x2="940" y2="1000" stroke="#2E2014" stroke-width="8" stroke-dasharray="18 12"/>
+
+  <text x="540" y="190" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" font-weight="700" letter-spacing="10" fill="#2E2014">ABONO · BASCULA DE DATOS</text>
+  <text x="540" y="245" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="26" letter-spacing="6" fill="#8a7a63">FOLIO 0001 · MICHOACAN, MX</text>
+  <line x1="220" y1="290" x2="860" y2="290" stroke="#2E2014" stroke-width="2" stroke-dasharray="10 8"/>
+
+  <text x="220" y="430" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="82" font-weight="900" fill="#2E2014">¿Sabes cuánto</text>
+  <text x="220" y="535" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="82" font-weight="900" fill="#2E2014">te costó producir</text>
+  <text x="220" y="640" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="82" font-weight="900" font-style="italic" fill="#B44A24">cada kilo?</text>
+
+  <line x1="220" y1="710" x2="860" y2="710" stroke="#2E2014" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="220" y="785" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" fill="#2E2014">LA MAYORIA NO LO SABE.</text>
+  <text x="220" y="840" font-family="'IBM Plex Mono','Courier New',monospace" font-size="34" fill="#2E2014">Y AHI SE VA LA GANANCIA.</text>
+
+  <text x="220" y="945" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="44" font-weight="900" font-style="italic" fill="#2E2014">ABONO</text>
+  <text x="860" y="945" text-anchor="end" font-family="'IBM Plex Mono','Courier New',monospace" font-size="26" letter-spacing="4" fill="#B44A24">SABE SI GANASTE.</text>
 </svg>

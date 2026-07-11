@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <!-- SLIDE 3 — CTA (sello + promesa) -->
+  <defs>
+    <path id="arcoTop3" d="M 320 400 A 220 220 0 0 1 760 400" fill="none"/>
+    <path id="arcoBot3" d="M 323 400 A 217 217 0 0 0 757 400" fill="none"/>
+  </defs>
+  <rect width="1080" height="1920" fill="#B44A24"/>
+  <rect x="70" y="70" width="940" height="1780" fill="#FBF6EA"/>
+  <rect x="104" y="104" width="872" height="1712" fill="none" stroke="#B44A24" stroke-width="4"/>
+
+  <!-- sello -->
+  <g font-family="'IBM Plex Mono','Courier New',monospace" font-weight="700">
+    <circle cx="540" cy="400" r="270" fill="none" stroke="#B44A24" stroke-width="13"/>
+    <circle cx="540" cy="400" r="246" fill="none" stroke="#B44A24" stroke-width="4"/>
+    <circle cx="540" cy="400" r="168" fill="none" stroke="#B44A24" stroke-width="4"/>
+    <text font-size="38" letter-spacing="7" fill="#B44A24"><textPath href="#arcoTop3" startOffset="50%" text-anchor="middle">ABONO · CONTROL</textPath></text>
+    <text font-size="34" letter-spacing="7" fill="#B44A24"><textPath href="#arcoBot3" startOffset="50%" text-anchor="middle">EST. 2026 · MICHOACÁN</textPath></text>
+    <path d="M540 512 V400" stroke="#B44A24" stroke-width="18" stroke-linecap="round"/>
+    <path d="M540 455 C472 455 434 407 434 339 C511 339 540 388 540 455 Z" fill="none" stroke="#B44A24" stroke-width="15" stroke-linejoin="round"/>
+    <path d="M540 400 C608 400 646 352 646 284 C569 284 540 333 540 400 Z" fill="none" stroke="#B44A24" stroke-width="15" stroke-linejoin="round"/>
+  </g>
+
+  <line x1="200" y1="800" x2="880" y2="800" stroke="#2E2014" stroke-width="3"/>
+
+  <text x="540" y="960" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="76" font-weight="900" fill="#2E2014">La libreta digital</text>
+  <text x="540" y="1055" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="76" font-weight="900" font-style="italic" fill="#B44A24">de tu invernadero.</text>
+
+  <text x="540" y="1220" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="42" fill="#2E2014">Gastos · Cortes · Ventas.</text>
+  <text x="540" y="1290" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="42" fill="#2E2014">Te dice si ganaste.</text>
+
+  <rect x="270" y="1420" width="540" height="120" fill="#2E2014"/>
+  <text x="540" y="1498" text-anchor="middle" font-family="'IBM Plex Mono','Courier New',monospace" font-size="44" font-weight="700" letter-spacing="4" fill="#FBF6EA">GRATIS · LINK EN BIO</text>
+
+  <line x1="200" y1="1650" x2="880" y2="1650" stroke="#2E2014" stroke-width="3"/>
+  <text x="200" y="1740" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="56" font-weight="900" font-style="italic" fill="#2E2014">ABONO</text>
+  <text x="880" y="1740" text-anchor="end" font-family="'IBM Plex Mono','Courier New',monospace" font-size="30" letter-spacing="3" fill="#B44A24">SABE SI GANASTE.</text>
+</svg>

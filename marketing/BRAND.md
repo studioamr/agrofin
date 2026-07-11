@@ -1,5 +1,9 @@
 # ABONO — Brand Bible (1 página)
 
+> Dirección: **agro-editorial mexicano**. Etiqueta de costal + ticket de báscula + sello de rancho.
+> Deliberadamente OPUESTO a PARFECT (lúdico/luminoso/redondeado): ABONO es papel, tinta y barro.
+> El producto (la app) conserva su UI clara verde para leerse al sol; esta identidad rige TODO lo público: redes, plantillas, carteles, empaques.
+
 ## Esencia
 **ABONO — La libreta digital de tu invernadero.**
 La app que junta gastos, cortes y ventas, y te dice si el ciclo te dejó ganancia.
@@ -10,35 +14,36 @@ La tesis: *el productor que conoce sus números cobra mejor, gasta mejor y duerm
 - **Línea de origen (se repite SIEMPRE que se cuente la historia):** `Nació en un invernadero de jitomate en Michoacán. No en una oficina.`
 
 ## Voz
-- **Idioma:** español de México, 100%. Cero anglicismos ("resumen", no "dashboard"; "ventas", no "revenue").
-- **Tono:** de productor a productor, en la sobremesa. Frases cortas. Un número por frase.
+- **Idioma:** español de México, 100%. Cero anglicismos.
+- **Tono:** de productor a productor. Frases cortas. Un número por frase. La honestidad ES la marca.
 - Nunca dice "optimiza tu gestión". Dice **"sabe cuánto te costó cada kilo"**.
-- Nunca promete magia ni contabilidad fiscal. La honestidad ES la marca.
-- Habla con números reales: *Ciclo 2026: $37,920 vendidos − $17,120 gastados = $20,800 libres.*
+- Habla como ticket de báscula: *FOLIO 0038 · 380 KG PRIMERA · $4,940.*
 
-## Paleta (la misma de la app)
+## Paleta (tierra, papel y barro — NO es la paleta de la app)
 | Uso | Color |
 |---|---|
-| Fondo claro (legible al sol) | `#eef3ea` |
-| Tinta (texto y números) | `#152619` |
-| Verde marca (ÚNICO acento principal) | `#168a4b` (ink `#0e6c39`) |
-| Ámbar (solo dinero/por cobrar) | `#c4790f` |
-| Rojo (solo pérdida) | `#cf3b2e` |
-| Tarjetas | `#ffffff`, radio 18px |
+| Crema papel (fondo) | `#F2EAD9` (papel claro `#FBF6EA`) |
+| Café tinta (texto) | `#2E2014` |
+| Barro cocido (ÚNICO acento principal) | `#B44A24` |
+| Oro cosecha (secundario: dinero, sellos) | `#D9A03F` |
+| Verde alfalfa (detalle agro, escaso) | `#435B34` |
+
+Regla: **crema + café siempre; barro como único acento fuerte; oro con cuentagotas; verde casi nunca.**
 
 ## Tipografía
-- **Todo:** Inter. Los **números van enormes** (peso 900) — son el héroe.
-- Etiquetas pequeñas en mayúsculas con tracking (estilo `.eyebrow` de la app).
+- **Display:** Fraunces (black / black italic) — el wordmark y los titulares. Fallback local: Georgia Bold.
+- **Ticket:** IBM Plex Mono (números, folios, fichas, "GRATIS PARA LOS PRIMEROS"). Fallback: Courier New.
+- Titulares en café, la palabra clave en barro. Números de dinero en mono, SIEMPRE.
 
 ## Logo
-- Wordmark: **ABONO** en Inter itálica pesada, blanco sobre el escenario o tinta sobre claro.
-- Avatar/perfil: el **disco verde glossy con brote blanco** (icon.svg) sobre squircle claro.
-- Nunca deformar, nunca cambiar el verde, nunca un segundo acento de moda.
+- Wordmark: **ABONO** en Fraunces black italic, café tinta sobre crema (o crema sobre café).
+- Avatar/perfil: el **sello de rancho** — anillo circular con "ABONO · CONTROL DE INVERNADERO", brote lineal al centro, todo en barro sobre crema (plantillas/avatar).
+- El sello puede ir ligeramente rotado (−8°) como estampado a mano. Nunca degradados, nunca glossy.
 
 ## Los tres lenguajes visuales (rotación del feed)
-1. **PANTALLA** — capturas reales de la app con números grandes (Resumen, Ciclo agrícola, Cortes). *La prueba.*
-2. **DATO** — tarjeta 1080×1080 con UN número que duele o enseña (`plantillas/post-dato`). *El gancho.*
-3. **CAMPO** — foto/video real del invernadero (el del tío): plantas, cortes, cajas, manos. *La verdad.*
+1. **TICKET** — el dato como recibo de báscula: papel claro, mono, folio, línea punteada (`plantillas/post-dato`). *El gancho.*
+2. **PANTALLA** — captura real de la app montada sobre marco crema con sello. *La prueba.*
+3. **CAMPO** — foto real del invernadero (el del tío), sin filtro de moda, con pie de foto tipo ficha en mono. *La verdad.*
 
 ## Los 5 módulos (siempre nombrados igual)
 | Módulo | Qué promete |
@@ -50,6 +55,8 @@ La tesis: *el productor que conoce sus números cobra mejor, gasta mejor y duerm
 | Ciclo agrícola | Ventas − gastos del ciclo completo, costo por kilo |
 
 ## Do / Don't
-- ✅ Números reales, capturas reales, invernadero real, luz de día, manos trabajando.
+- ✅ Papel, tinta, sellos, folios, líneas punteadas, números en mono, fotos de campo reales con pie de ficha.
 - ✅ El caso del tío como historia fundadora (con su permiso).
-- ❌ Stock de "agricultor sonriendo a cámara", drones épicos ajenos, jerga contable, emojis dentro del producto, prometer facturación, inglés innecesario, neón.
+- ❌ Parecerse a PARFECT: nada de personajes 3D, glossy, esquinas súper redondeadas ni verdes brillantes en lo público.
+- ❌ Stock de "agricultor sonriendo", drones épicos ajenos, jerga contable, neón, degradados.
+- ❌ Prometer facturación fiscal o "hazte rico". La única promesa: **sabe si ganaste**.

@@ -1,15 +1,20 @@
 <svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-  <!-- AVATAR / FOTO DE PERFIL (IG + TikTok) — el brote de ABONO -->
+  <!-- AVATAR: sello de rancho ABONO — barro sobre crema, doble arco legible -->
   <defs>
-    <radialGradient id="disc" cx="36%" cy="28%" r="78%">
-      <stop offset="0" stop-color="#5fd06a"/><stop offset="1" stop-color="#138a4b"/>
-    </radialGradient>
+    <path id="arcoTop" d="M 200 540 A 340 340 0 0 1 880 540" fill="none"/>
+    <path id="arcoBot" d="M 205 540 A 335 335 0 0 0 875 540" fill="none"/>
   </defs>
-  <rect width="1080" height="1080" fill="#eef6ec"/>
-  <circle cx="540" cy="567" r="354" fill="#0a3a1e" opacity=".13"/>
-  <circle cx="540" cy="540" r="354" fill="url(#disc)"/>
-  <ellipse cx="438" cy="405" rx="168" ry="101" fill="#ffffff" opacity=".18"/>
-  <path d="M540 725 V540" stroke="#ffffff" stroke-width="50" stroke-linecap="round"/>
-  <path d="M540 607 C422 607 354 523 354 405 C489 405 540 489 540 607 Z" fill="#ffffff"/>
-  <path d="M540 540 C658 540 726 456 726 338 C591 338 540 422 540 540 Z" fill="#ffffff"/>
+  <rect width="1080" height="1080" fill="#F2EAD9"/>
+  <g transform="rotate(-5 540 540)" font-family="'IBM Plex Mono','Courier New',monospace" font-weight="700">
+    <circle cx="540" cy="540" r="430" fill="none" stroke="#B44A24" stroke-width="20"/>
+    <circle cx="540" cy="540" r="392" fill="none" stroke="#B44A24" stroke-width="5"/>
+    <circle cx="540" cy="540" r="270" fill="none" stroke="#B44A24" stroke-width="5"/>
+    <text font-size="58" letter-spacing="10" fill="#B44A24"><textPath href="#arcoTop" startOffset="50%" text-anchor="middle">ABONO · CONTROL</textPath></text>
+    <text font-size="52" letter-spacing="10" fill="#B44A24"><textPath href="#arcoBot" startOffset="50%" text-anchor="middle">EST. 2026 · MICHOACÁN</textPath></text>
+    <circle cx="235" cy="540" r="8" fill="#B44A24"/>
+    <circle cx="845" cy="540" r="8" fill="#B44A24"/>
+    <path d="M540 720 V545" stroke="#B44A24" stroke-width="28" stroke-linecap="round"/>
+    <path d="M540 615 C432 615 370 537 370 429 C494 429 540 507 540 615 Z" fill="none" stroke="#B44A24" stroke-width="22" stroke-linejoin="round"/>
+    <path d="M540 545 C648 545 710 467 710 359 C586 359 540 437 540 545 Z" fill="none" stroke="#B44A24" stroke-width="22" stroke-linejoin="round"/>
+  </g>
 </svg>

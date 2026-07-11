@@ -10,7 +10,7 @@
   Sabe si ganaste.
   ↓ Pruébala gratis
   ```
-- **Link:** https://parfectapp.github.io/agrofin/
+- **Link:** https://studioamr.github.io/agrofin/
 - **Avatar:** el brote sobre disco verde (plantillas/avatar.png).
 
 ## Estrategia del grid
