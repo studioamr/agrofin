@@ -11,7 +11,7 @@
 
 Cuando corra la rutina de ABONO, Claude hace esto en orden:
 
-1. **Revisar la app en vivo** — que https://parfectapp.github.io/agrofin/ cargue sin errores (curl a index + versiones). Si hay error: avisar a André de inmediato, es prioridad sobre todo lo demás.
+1. **Revisar la app en vivo** — que https://studioamr.github.io/agrofin/ cargue sin errores (curl a index + versiones). Si hay error: avisar a André de inmediato, es prioridad sobre todo lo demás.
 2. **Revisar `seguimiento.csv`** — contar estados: cuántos `invitado`, `instaló`, `registró_algo`, `activo`. Compararlo contra los hitos del `PLAN-LANZAMIENTO.md` (día 10 → 4, día 20 → 7, día 30 → 10).
 3. **Preparar la tanda de la semana** — según la fase del plan:
    - Semana 1–2: 3–5 mensajes 1:1 personalizados (nombres desde el CSV, plantilla de `MENSAJES.md`), listos para que André los copie/pegue.

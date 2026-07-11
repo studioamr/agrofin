@@ -1,7 +1,7 @@
 # MENSAJES — Todo el copy listo para copiar/pegar
 
 > Reemplaza `[Nombre]`, `[cultivo]`, `[link]` antes de enviar. Personaliza SIEMPRE el 1:1 — el copy genérico convierte la mitad.
-> Link oficial (heredado de AGROFIN, ver `MARCA.md` → sección 9): https://parfectapp.github.io/agrofin/
+> Link oficial (heredado de AGROFIN, ver `MARCA.md` → sección 9): https://studioamr.github.io/agrofin/
 
 ---
 

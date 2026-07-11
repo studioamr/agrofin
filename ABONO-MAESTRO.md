@@ -6,7 +6,7 @@
 **ABONO** es la app de André Macouzet (andremacouzetruiz@gmail.com) para el **control de invernaderos**: "Sabe si ganaste." Junta gastos, cortes (producción), ventas, cobranza, trabajos, riego y bitácora, y calcula la utilidad real del ciclo agrícola. En español, hecha para productores de Michoacán. El primer usuario real es el **tío de André** (jitomate saladet, semilla Mosquetero).
 
 - **Nombre:** ABONO (doble sentido: fertilizante + pago a cuenta). Historia: INVERNA → AGROFIN → **ABONO** (definitivo, jul 2026).
-- **App en vivo:** https://parfectapp.github.io/agrofin/ (URL heredada de AGROFIN — ver pendientes)
+- **App en vivo:** https://studioamr.github.io/agrofin/ (URL heredada de AGROFIN — ver pendientes)
 - **Repo:** github.com/parfectapp/agrofin (público, GitHub Pages auto-deploy en push)
 - **Carpeta local:** `~/claude/inverna` (el id interno sigue siendo "inverna" — NO renombrar carpeta ni claves internas, romperia rutas)
 - **Preview local:** puerto 4182 (`python3 -m http.server 4182`)
@@ -45,7 +45,7 @@
 ## 5. Qué falta (el pendiente real)
 
 **Solo André puede (bloqueadores):**
-1. **Supabase URL Configuration** (2 min): Authentication → URL Configuration → Site URL + Redirect URLs = `https://parfectapp.github.io/agrofin/`. Sin esto, los correos de restablecer contraseña y confirmación NO abren la app.
+1. **Supabase URL Configuration** (2 min): Authentication → URL Configuration → Site URL + Redirect URLs = `https://studioamr.github.io/agrofin/`. Sin esto, los correos de restablecer contraseña y confirmación NO abren la app.
 2. **git push** después de cada tanda de cambios de Claude (remote ya configurado).
 3. Borrar usuarios de prueba en Supabase: `agrofin.v13test@gmail.com`, `agrofin.demo2@gmail.com`, `agrofin.prueba@gmail.com`.
 4. Decidir sobre la **URL**: ¿renombrar repo a "abono"? (rompería el link instalado del tío — avisar antes) ¿o dominio propio?

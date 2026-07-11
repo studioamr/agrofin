@@ -118,7 +118,7 @@ Reglas de imagen:
 **ABONO** — doble sentido a propósito: **fertilizante** (lo que hace crecer tu cosecha) + **abono/pago a cuenta** (lo que llevas registrado en la app). Encaja perfecto con una app de agro + finanzas.
 - Historia del nombre: empezó como INVERNA → luego AGROFIN → ahora **ABONO** (nombre definitivo).
 - Nombre público: **ABONO**
-- Link oficial (por ahora, heredado de AGROFIN): https://parfectapp.github.io/agrofin/
+- Link oficial (por ahora, heredado de AGROFIN): https://studioamr.github.io/agrofin/
   - *Pendiente:* decidir si renombrar el repo/URL a algo con "abono" (ver `ABONO-MAESTRO.md` → pendientes). Si tu tío ya tiene el link guardado o instalado en su pantalla de inicio, renombrar la URL se lo rompe — avísale antes si decides hacerlo.
 - **Buscar "ABONO" en IMPI** antes de invertir más en la marca (nombre común, puede haber marcas registradas en otras categorías — revisar que no choque en clase de software/servicios financieros).
 
