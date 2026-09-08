@@ -35,5 +35,14 @@ const Store = (() => {
   }
   function wipe(uid) { try { localStorage.removeItem(dkey(uid)); } catch (e) {} }
 
-  return { empty, load, save, wipe, uid };
+  // Re-inyecta las fotos locales (por id de registro) en un objeto que viene SIN fotos (de la nube).
+  function mergePhotos(target, source) {
+    if (!source) return target;
+    const t = { ...target }, byId = {};
+    PHOTO_KEYS.forEach(k => (source[k] || []).forEach(r => { if (r && r.photos && r.photos.length) byId[k + ':' + r.id] = r.photos; }));
+    PHOTO_KEYS.forEach(k => { if (Array.isArray(t[k])) t[k] = t[k].map(r => { const p = byId[k + ':' + r.id]; return p ? { ...r, photos: p } : r; }); });
+    return t;
+  }
+
+  return { empty, load, save, wipe, uid, stripPhotos, mergePhotos };
 })();
