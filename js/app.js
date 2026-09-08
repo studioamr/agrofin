@@ -8,11 +8,13 @@ const App = (() => {
   let route = 'landing';
 
   let syncT = null;
+  // A la nube SIEMPRE va sin fotos (las fotos pesan y disparan el tráfico/egress). Las fotos viven solo en el teléfono.
+  const cloudSave = () => { if (Cloud.enabled()) Cloud.saveData(userId, Store.stripPhotos(db)).catch(() => {}); };
   function save() {
     if (!userId) return;
     db._savedAt = Date.now();                                 // marca de tiempo para saber cuál copia es la más nueva
-    Store.save(userId, db);                                   // caché local (instantáneo, offline)
-    if (Cloud.enabled()) { clearTimeout(syncT); syncT = setTimeout(() => Cloud.saveData(userId, db).catch(() => {}), 800); } // respaldo en la nube (con pausa)
+    Store.save(userId, db);                                   // caché local (instantáneo, offline, CON fotos)
+    clearTimeout(syncT); syncT = setTimeout(cloudSave, 1200); // respaldo en la nube SIN fotos (con pausa)
   }
   const REC_KEYS = ['expenses', 'harvests', 'orders', 'clients', 'tasks', 'irrigations', 'applications', 'inventory', 'log', 'notes'];
   function countRecords(d) { return d ? REC_KEYS.reduce((s, k) => s + ((d[k] || []).length), 0) : 0; }
@@ -31,20 +33,21 @@ const App = (() => {
   async function loadUser() {
     let cloud = null;
     if (Cloud.enabled()) { try { cloud = await Cloud.loadData(userId); } catch (e) {} }
-    const cache = Store.load(userId);                          // null si no hay nada en este dispositivo
-    // Elige la copia MÁS NUEVA (evita que la nube vieja borre cambios hechos sin internet).
-    let data;
-    if (cloud && cache) data = ((cache._savedAt || 0) > (cloud._savedAt || 0)) ? cache : cloud;
-    else data = cloud || cache;
-    if (countRecords(data) === 0) { const legacy = findLegacyData(); if (legacy) data = legacy; } // recupera datos de versiones viejas
+    const cache = Store.load(userId);                          // full local (CON fotos); null si no hay nada
+    let data, subir = false;
+    if (cloud && cache) {
+      if ((cache._savedAt || 0) > (cloud._savedAt || 0)) { data = cache; subir = true; }   // local más nuevo → sube
+      else { data = Store.mergePhotos(cloud, cache); }                                       // nube más nueva → recupera fotos locales, NO sube
+    } else if (cache) { data = cache; subir = true; }                                        // solo local
+    else { data = cloud; }                                                                    // solo nube (o nada)
+    if (countRecords(data) === 0) { const legacy = findLegacyData(); if (legacy) { data = legacy; subir = true; } }
     db = { ...Store.empty(), ...(data || {}) };
     Store.save(userId, db);
-    if (Cloud.enabled()) { Cloud.saveData(userId, db).catch(() => {}); } // respalda en la nube (incluye lo recuperado / lo más nuevo)
+    if (subir) cloudSave();   // solo sube cuando de verdad hay algo nuevo que respaldar (evita re-subir en cada arranque)
   }
-  function flushSync() { // sube de inmediato lo pendiente (al cerrar / cambiar de app)
-    if (!userId || !Cloud.enabled()) return;
-    clearTimeout(syncT);
-    Cloud.saveData(userId, db).catch(() => {});
+  function flushSync() { // al cerrar / cambiar de app, sube lo pendiente (sin fotos)
+    if (!userId) return;
+    clearTimeout(syncT); cloudSave();
   }
   async function boot() {
     Cloud.init();
@@ -126,7 +129,7 @@ const App = (() => {
           await Cloud.signUp(email, pw);
           const u = await Cloud.sessionUser();
           if (!u) { state.pendingEmail = email; state.authErr = null; state.authBusy = false; go('checkEmail'); return; } // verificación de correo activada
-          userId = u.id; userEmail = u.email || email; db = Store.empty(); Store.save(userId, db); Cloud.saveData(userId, db).catch(() => {});
+          userId = u.id; userEmail = u.email || email; db = Store.empty(); Store.save(userId, db); cloudSave();
           state.authBusy = false; UI.toast('¡Cuenta creada!'); go('home');
         } else {
           await Cloud.signIn(email, pw);
