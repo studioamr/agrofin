@@ -6,6 +6,7 @@ const App = (() => {
 
   const state = { period: UI.todayKey(), gastoCat: '', cliSeg: 'clientes', pedFilter: 'todos', bitSeg: 'bitacora', taskFilter: 'todos', invKind: 'insumo', authMode: 'signup', authErr: null, authBusy: false, pendingEmail: '' };
   let route = 'landing';
+  const LOCAL = (typeof window !== 'undefined' && !!window.ABONO_LOCAL); // modo 100% local (tio.html): sin login, sin nube, todo en el teléfono
 
   let syncT = null;
   // A la nube SIEMPRE va sin fotos (las fotos pesan y disparan el tráfico/egress). Las fotos viven solo en el teléfono.
@@ -23,7 +24,8 @@ const App = (() => {
     let best = null, bestN = 0;
     try {
       for (const k of Object.keys(localStorage)) {
-        if (k === 'inverna_v1' || k.indexOf('inverna_db__') === 0 || k.indexOf('agrofin_cache__') === 0) {
+        if (k === ('abono_cache__' + userId)) continue;   // no recuperar de la propia caché de este modo
+        if (k === 'inverna_v1' || k.indexOf('inverna_db__') === 0 || k.indexOf('agrofin_cache__') === 0 || k.indexOf('abono_cache__') === 0) {
           try { const d = JSON.parse(localStorage.getItem(k)); const n = countRecords(d); if (n > bestN) { bestN = n; best = d; } } catch (e) {}
         }
       }
@@ -50,6 +52,11 @@ const App = (() => {
     clearTimeout(syncT); cloudSave();
   }
   async function boot() {
+    if (LOCAL) {                                  // MODO TÍO: sin login ni nube, directo al invernadero
+      userId = 'tio'; userEmail = '';
+      await loadUser();                           // Cloud no inicializado → solo local + recuperación del teléfono
+      route = 'home'; render(); return;
+    }
     Cloud.init();
     // Llega desde el enlace del correo para poner nueva contraseña
     const recovery = /type=recovery/.test(location.hash || '') || /type=recovery/.test(location.search || '');
@@ -174,8 +181,8 @@ const App = (() => {
         return fail(m || 'No se pudo actualizar la contraseña.');
       }
     },
-    async logout() { UI.closeSheet(); await Cloud.signOut(); userId = null; userEmail = ''; db = Store.empty(); state.authErr = null; go('landing'); },
-    seeLanding: () => { UI.closeSheet(); go('landing'); },
+    async logout() { if (LOCAL) { UI.closeSheet(); UI.toast('Esta versión no usa cuenta — todo se guarda en tu teléfono'); return; } UI.closeSheet(); await Cloud.signOut(); userId = null; userEmail = ''; db = Store.empty(); state.authErr = null; go('landing'); },
+    seeLanding: () => { if (LOCAL) { UI.closeSheet(); return; } UI.closeSheet(); go('landing'); },
     goCortes: () => go('cortes'),
     goReceivable: () => { state.cliSeg = 'pedidos'; state.pedFilter = 'cobrar'; go('clientes'); },
     closeSheet: () => UI.closeSheet(),
