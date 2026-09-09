@@ -43,6 +43,8 @@ const App = (() => {
     } else if (cache) { data = cache; subir = true; }                                        // solo local
     else { data = cloud; }                                                                    // solo nube (o nada)
     if (countRecords(data) === 0) { const legacy = findLegacyData(); if (legacy) { data = legacy; subir = true; } }
+    // Primera vez en el teléfono del tío: si no hay NADA guardado, carga su respaldo ya incrustado en la página (tio.html). Al guardarse queda en su teléfono y ya no se vuelve a usar el respaldo.
+    if (countRecords(data) === 0 && LOCAL && typeof window !== 'undefined' && window.ABONO_SEED) { data = window.ABONO_SEED; }
     db = { ...Store.empty(), ...(data || {}) };
     Store.save(userId, db);
     if (subir) cloudSave();   // solo sube cuando de verdad hay algo nuevo que respaldar (evita re-subir en cada arranque)
