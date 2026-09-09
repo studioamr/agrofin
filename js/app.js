@@ -456,6 +456,19 @@ const App = (() => {
         UI.toast('Datos exportados');
       } catch (e) { UI.toast('No se pudo exportar'); }
     },
+    importData: () => UI.sheet('<div class="sheet-head"><div class="h2">Importar datos</div></div>'
+      + '<p class="muted small mb12">Pega aquí el respaldo (.json) de tu invernadero — el que sacaste del panel o de "Exportar mis datos". Reemplaza lo que tengas ahora.</p>'
+      + '<textarea class="ta" id="imp-json" placeholder=\'{ "expenses": [ ... ], "harvests": [ ... ] }\' style="min-height:200px;font-size:13px"></textarea>'
+      + '<button class="btn btn-primary mt8" data-act="doImport">' + UI.icon('check') + ' Importar y guardar</button>'),
+    doImport() {
+      const raw = (document.getElementById('imp-json')?.value || '').trim();
+      if (!raw) return UI.toast('Pega el respaldo primero');
+      let obj; try { obj = JSON.parse(raw); } catch (e) { return UI.toast('Ese texto no es un respaldo válido (.json)'); }
+      if (obj && obj.data && typeof obj.data === 'object' && !Array.isArray(obj.data)) obj = obj.data; // pegó la fila completa de Supabase
+      if (!obj || typeof obj !== 'object' || !('expenses' in obj || 'harvests' in obj || 'cycle' in obj || 'meta' in obj)) return UI.toast('No parece un respaldo de ABONO');
+      db = { ...Store.empty(), ...obj };
+      save(); UI.closeSheet(); state.period = UI.todayKey(); go('home'); UI.toast('¡Datos importados! Ya quedaron guardados.');
+    },
     resetDemo: () => UI.modal(`<div class="h3 mb8">¿Cargar datos de ejemplo?</div><p class="muted small mb16">Reemplaza lo que tengas ahora por datos de muestra para que veas cómo funciona la app.</p>
       <div class="btn-row"><button class="btn btn-ghost" data-act="closeSheet">Cancelar</button><button class="btn btn-danger" data-act="doReset">Cargar ejemplo</button></div>`),
     doReset() { db = Store.empty(); Data.seed(db); save(); UI.closeSheet(); state.period = UI.todayKey(); go('home'); UI.toast('Ejemplo recargado'); },

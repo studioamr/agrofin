@@ -283,6 +283,7 @@ window.Views = window.Views || {};
       <div class="set-grp">Datos</div>
       <div class="card set-list">
         ${row('exportData', 'download', '#3a92e0', 'Exportar mis datos', 'Guarda un respaldo (.json)')}
+        ${row('importData', 'share', '#178a4b', 'Importar datos', 'Pega un respaldo (.json) para recuperarlos')}
         ${row('resetDemo', 'info', '#c4790f', 'Cargar datos de ejemplo', 'Para ver cómo se usa la app')}
       </div>
 
