@@ -50,6 +50,12 @@ const App = (() => {
     if (!out.cycle || !out.cycle.crop) out.cycle = seed.cycle || out.cycle;
     if (Array.isArray(seed.cycles) && seed.cycles.length && !(out.cycles || []).length) out.cycles = seed.cycles;
     if (Array.isArray(seed.products)) out.products = Array.from(new Set([...(out.products || []), ...seed.products]));
+    // Correcciones puntuales por id (p.ej. un monto que el tío corrigió y volví a incrustar). Idempotente por SEED_V.
+    const patches = (typeof window !== 'undefined' && window.ABONO_SEED_PATCH) || [];
+    patches.forEach(p => {
+      if (!p || !p.k || !p.id || !p.set) return;
+      out[p.k] = (out[p.k] || []).map(r => (r && r.id === p.id) ? { ...r, ...p.set } : r);
+    });
     out._seedV = v;
     return out;
   }
