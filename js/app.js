@@ -32,6 +32,27 @@ const App = (() => {
     } catch (e) {}
     return bestN > 0 ? best : null;
   }
+  // Funde el respaldo incrustado (window.ABONO_SEED en tio.html) de forma ADITIVA por id.
+  // La primera vez trae todo; si luego actualizo el respaldo y subo window.ABONO_SEED_V, agrega SOLO los registros nuevos (por id) SIN borrar ni pisar lo que el tío ya capturó. No se repite mientras el SEED_V no cambie.
+  function mergeSeed(current) {
+    const seed = (typeof window !== 'undefined') ? window.ABONO_SEED : null;
+    if (!seed) return current;
+    const v = (typeof window !== 'undefined' && window.ABONO_SEED_V) || 1;
+    const cur = current || {};
+    if ((cur._seedV || 0) >= v) return current;                 // este respaldo ya se aplicó en este teléfono
+    const out = { ...Store.empty(), ...cur };
+    REC_KEYS.forEach(k => {
+      const have = new Set((out[k] || []).map(r => r && r.id).filter(Boolean));
+      const add = (seed[k] || []).filter(r => r && r.id && !have.has(r.id));
+      if (add.length) out[k] = (out[k] || []).concat(add);
+    });
+    if (!out.meta || !out.meta.name || out.meta.name === 'Mi invernadero') out.meta = seed.meta || out.meta;
+    if (!out.cycle || !out.cycle.crop) out.cycle = seed.cycle || out.cycle;
+    if (Array.isArray(seed.cycles) && seed.cycles.length && !(out.cycles || []).length) out.cycles = seed.cycles;
+    if (Array.isArray(seed.products)) out.products = Array.from(new Set([...(out.products || []), ...seed.products]));
+    out._seedV = v;
+    return out;
+  }
   async function loadUser() {
     let cloud = null;
     if (Cloud.enabled()) { try { cloud = await Cloud.loadData(userId); } catch (e) {} }
@@ -43,8 +64,8 @@ const App = (() => {
     } else if (cache) { data = cache; subir = true; }                                        // solo local
     else { data = cloud; }                                                                    // solo nube (o nada)
     if (countRecords(data) === 0) { const legacy = findLegacyData(); if (legacy) { data = legacy; subir = true; } }
-    // Primera vez en el teléfono del tío: si no hay NADA guardado, carga su respaldo ya incrustado en la página (tio.html). Al guardarse queda en su teléfono y ya no se vuelve a usar el respaldo.
-    if (countRecords(data) === 0 && LOCAL && typeof window !== 'undefined' && window.ABONO_SEED) { data = window.ABONO_SEED; }
+    // Respaldo incrustado en la página (tio.html): se funde de forma ADITIVA por id.
+    if (LOCAL && typeof window !== 'undefined' && window.ABONO_SEED) { data = mergeSeed(data); }
     db = { ...Store.empty(), ...(data || {}) };
     Store.save(userId, db);
     if (subir) cloudSave();   // solo sube cuando de verdad hay algo nuevo que respaldar (evita re-subir en cada arranque)
